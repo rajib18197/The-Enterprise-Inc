@@ -1,0 +1,154 @@
+.filter {
+  border: 1px solid var(--color-grey-100);
+  background-color: var(--color-grey-0);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--border-radius-sm);
+  padding: 0.4rem;
+  display: flex;
+  gap: 0.8rem;
+}
+
+.filterButton {
+  background-color: var(--color-grey-0);
+  border: none;
+
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  font-size: 1.4rem;
+  /* To give the same height as select */
+  padding: 1rem 2.5rem;
+  transition: all 0.3s;
+}
+
+.filterButton.active {
+  background-color: var(--color-brand-600);
+  color: var(--color-brand-50);
+}
+
+.filterButton:hover:not(:disabled) {
+  background-color: var(--color-brand-600);
+  color: var(--color-brand-50);
+}
+
+.round {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.roundOptions {
+  display: flex;
+  gap: 2rem;
+}
+
+.roundButton {
+  border: 2px solid var(--color-primary);
+  outline: none;
+  padding: 0.8rem 3.5rem;
+  font-size: 1.7rem;
+  border-radius: 3rem;
+  cursor: pointer;
+}
+
+.roundButton.active {
+  background-color: var(--color-indigo-700);
+  color: var(--color-grey-100);
+}
+
+.boxOptions {
+  display: flex;
+  gap: 2rem;
+}
+
+.boxBtn {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 2px solid var(--color-brand-50);
+  border-radius: 4px;
+  outline: none;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  background: var(--color-grey-50);
+  color: rgb(37, 27, 27);
+  transition: all 0.3s ease-in;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.boxBtn.active {
+  border: 2px solid var(--color-brand-800);
+  background-color: var(--color-brand-800);
+  color: white;
+}
+
+.checkboxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.checkboxOptions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, max-content));
+  gap: 2rem;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  /* border: 2px solid red; */
+}
+
+.checkbox input {
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid #222;
+  cursor: pointer;
+}
+
+.checkbox label {
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* https://bigfrontend.dev/problem */
+.toggleContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggleBtn {
+  padding: 8px;
+  background-color: #250f33;
+  width: 6rem;
+  height: 3rem;
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toggleBtn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: none;
+  outline: none;
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.toggle::after {
+  transform: translateX(100%);
+}
