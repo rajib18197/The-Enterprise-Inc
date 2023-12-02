@@ -32,19 +32,19 @@ export default function Filter({ filterFields, options }) {
 export function FilterRound({ filterFields, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const currentFilter = Number(searchParams.get(filterFields)) || "any";
+  const [first, second] = filterFields.split("-");
+  const currentFilter1 = searchParams.get(first);
+  const currentFilter2 = Number(searchParams.get(second));
 
-  function handleClick(value) {
-    // console.log(value, searchParams.get(filterFields));
-    if (value === Number(searchParams.get(filterFields))) {
-      console.log("true");
-      searchParams.delete(filterFields);
-      setSearchParams(searchParams);
-      return;
-    }
-    searchParams.set(filterFields, value);
+  function handleClick({ experience, salaryExpectationRange }) {
+    const [first, second] = filterFields.split("-");
+    searchParams.set(first, experience);
+    const arr = Object.values(salaryExpectationRange);
+    searchParams.set(
+      second,
+      arr.length === 1 ? `${arr.join("")}plus` : arr.join("-")
+    );
     setSearchParams(searchParams);
-    console.log(options[0].value, currentFilter);
   }
 
   return (
@@ -59,27 +59,27 @@ export function FilterRound({ filterFields, options }) {
         {filterFields}
       </h2>
       <div className={styles.roundOptions}>
-        <button
-          className={`${styles.roundButton} ${
-            currentFilter === "any" ? styles.active : ""
-          }`}
-          onClick={() => {
-            searchParams.delete(filterFields);
-            setSearchParams(searchParams);
-          }}
-        >
-          Any
-        </button>
         {options.map((option) => (
           <button
+            key={option.salaryExpectationRange.min}
             className={`${styles.roundButton} ${
-              currentFilter === option.value ? styles.active : ""
+              currentFilter1 === option.experience &&
+              currentFilter2 === option.salaryExpectationRange
+                ? styles.active
+                : ""
             }`}
-            key={option.value}
-            onClick={() => handleClick(option.value)}
-            // disabled={option.value === currentFilter}
+            onClick={() =>
+              handleClick({
+                experience: option.experience,
+                salaryExpectationRange: option.salaryExpectationRange,
+              })
+            }
           >
-            {option.value}
+            {option.experience}({option.salaryExpectationRange.min}
+            {option.salaryExpectationRange.max
+              ? `-${option.salaryExpectationRange.max}`
+              : "+"}
+            )
           </button>
         ))}
       </div>
@@ -148,15 +148,20 @@ export function FilterCheck({ filterFields, options }) {
   const [searchParams, setSearchParams] = useSearchParams();
   // const currentChecked = searchParams.get(filterFields) || false;
 
+  function isChecked(option) {
+    const existingValues = searchParams.get(filterFields);
+    return existingValues?.split(",").includes(option.value);
+  }
+
   function handleClick(value) {
     console.log("called");
-    const existingValues = searchParams.get(filterFields);
+    const existingValues = searchParams.get(filterFields); // NOT an array
     console.log(existingValues);
     const arr = existingValues?.split(",");
     console.log(arr);
 
-    if (arr?.includes(value)) {
-      const fill = arr.filter((el) => el !== value);
+    if (arr?.includes(value.value)) {
+      const fill = arr.filter((el) => el !== value.value);
       if (fill.length === 0) {
         searchParams.delete(filterFields);
         setSearchParams(searchParams);
@@ -168,10 +173,10 @@ export function FilterCheck({ filterFields, options }) {
     }
 
     if (existingValues) {
-      searchParams.set(filterFields, [existingValues, value]);
+      searchParams.set(filterFields, [existingValues, value.value]);
       setSearchParams(searchParams);
     } else {
-      searchParams.set(filterFields, value);
+      searchParams.set(filterFields, value.value);
       setSearchParams(searchParams);
     }
   }
@@ -182,81 +187,24 @@ export function FilterCheck({ filterFields, options }) {
       <div className={styles.checkboxOptions}>
         {options.map((option) => (
           <div
-            key={option}
+            key={option.value}
             className={styles.checkbox}
-            onClick={() => {
-              handleClick(option);
-              console.log(2);
-            }}
           >
             <input
               type="checkbox"
-              name={option}
-              checked={searchParams.get(filterFields)?.includes(option)}
-              // onChange={() => setIsChecked((check) => !check)}
-              id={option}
+              name={option.value}
+              // checked={searchParams.get(filterFields)?.includes(option.value)}
+              checked={isChecked(option)}
+              onChange={() => {
+                handleClick(option);
+                console.log(2);
+              }}
+              id={option.value}
             />
-            {/* TODO: problems occured when there is html for attr in onClick handler  */}
-            <label
-              htmlFor={option}
-              // onClick={(e) => {
-              //   console.log(1);
-              //   handleClick(option);
-              //   e.stopPropagation();
-              // }}
-            >
-              {option}
-            </label>
+            <label htmlFor={option.value}>{option.label}</label>
           </div>
         ))}
       </div>
-    </div>
-  );
-}
-
-export function FilterSwitch({ filterFields, options }) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const btnRef = useRef(null);
-  const [isSwitchOn, setIsSwitchOn] = useState(false);
-
-  const currentFilter = searchParams.get(filterFields) || "";
-
-  useEffect(
-    function () {
-      if (currentFilter === "true") {
-        btnRef.current.classList.add(`${styles.toggle}`);
-        console.log(currentFilter);
-        setIsSwitchOn(true);
-      } else {
-        btnRef.current.classList.remove(`${styles.toggle}`);
-      }
-    },
-    [isSwitchOn]
-  );
-
-  function handleToggle() {
-    // console.log(btnRef.current);
-    setIsSwitchOn((switchOn) => !switchOn);
-    // btnRef.current.classList.toggle(`${styles.toggle}`);
-    searchParams.set(filterFields, !isSwitchOn);
-    setSearchParams(searchParams);
-  }
-
-  return (
-    <div className={styles.switchOptions}>
-      {options.map((option) => (
-        <div key={option.textHeading} className={styles.toggleContainer}>
-          <div className={styles.description}>
-            <h3>{option.textHeading}</h3>
-            <p>{option.text}</p>
-          </div>
-          <button
-            className={styles.toggleBtn}
-            onClick={handleToggle}
-            ref={btnRef}
-          ></button>
-        </div>
-      ))}
     </div>
   );
 }

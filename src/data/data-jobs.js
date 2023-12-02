@@ -1,0 +1,58 @@
+export const jobs = [
+  {
+    title: "Frontend Engineer",
+    type: "remote",
+    salary: 2000,
+    experience: "junior",
+    benefit: "career-growth",
+  },
+  {
+    title: "Software Engineer",
+    type: "full-time",
+    salary: 5000,
+    experience: "mid-level",
+    benefit: "global-exposure",
+  },
+  {
+    title: "DevOps Engineer",
+    type: "internship",
+    salary: 2500,
+    experience: "junior",
+    benefit: "career-growth",
+  },
+  {
+    title: "Backend Engineer",
+    type: "full-time",
+    salary: 8000,
+    experience: "senior",
+    benefit: "competitive-pay",
+  },
+  {
+    title: "UI/UX Engineer",
+    type: "internship",
+    salary: 2500,
+    experience: "junior",
+    benefit: "career-growth",
+  },
+  {
+    title: "Lead Software Architect",
+    type: "full-time",
+    salary: 10000,
+    experience: "senior",
+    benefit: "health-wellness",
+  },
+  {
+    title: "Backend Engineer",
+    type: "remote",
+    salary: 5000,
+    experience: "mid-level",
+    benefit: "competitive-pay",
+  },
+  {
+    title: "Solution Architect",
+    type: "full-time",
+    salary: 10000,
+    experience: "senior",
+    benefit: "global-exposure",
+  },
+];

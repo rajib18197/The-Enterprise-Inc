@@ -4,7 +4,7 @@ const rotate = keyframes`
   to {
     transform: rotate(1turn)
   }
-`;
+`; 
 
 const Spinner = styled.div`
   margin: 4.8rem auto;

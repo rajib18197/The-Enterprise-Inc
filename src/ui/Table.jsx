@@ -1,50 +1,60 @@
+import { createContext, useContext } from "react";
 import styled from "styled-components";
 
 const StyledTable = styled.div`
-  border: 1px solid var(--color-grey-200);
-
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
 `;
 
-const CommonRow = styled.header`
+const CommonRow = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
-  column-gap: 2.4rem;
+  column-gap: 1rem;
   align-items: center;
   transition: none;
 `;
 
 const StyledHeader = styled(CommonRow)`
-  padding: 1.6rem 2.4rem;
+  padding: 1rem 2.4rem;
 
   background-color: var(--color-grey-50);
   border-bottom: 1px solid var(--color-grey-100);
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+
+  font-weight: 500;
   color: var(--color-grey-600);
 `;
 
 const StyledBody = styled.section`
-  margin: 0.4rem 0;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 `;
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-grey-100);
+  &:nth-child(odd) {
+    background-color: var(--color-red-100);
+    /* background-color: #fee2e2; */
+    color: #4b5563;
+  }
+
+  &:nth-child(odd) :first-child {
+    color: #4b5563;
   }
 `;
 
 const Footer = styled.footer`
-  background-color: var(--color-grey-50);
-  display: flex;
-  justify-content: center;
-  padding: 1.2rem;
+  // background-color: var(--color-grey-100);
+
+  // display: flex;
+  width: 100%;
+  // justify-content: center;
+  padding: 1.4rem;
 
   &:not(:has(*)) {
     display: none;
@@ -57,3 +67,41 @@ const Empty = styled.p`
   text-align: center;
   margin: 2.4rem;
 `;
+
+const TableContext = createContext();
+
+export default function Table({ columns, children }) {
+  return (
+    <TableContext.Provider value={{ columns }}>
+      <StyledTable role="table">{children}</StyledTable>
+    </TableContext.Provider>
+  );
+}
+
+function Header({ children }) {
+  const { columns } = useContext(TableContext);
+  return (
+    <StyledHeader role="row" columns={columns}>
+      {children}
+    </StyledHeader>
+  );
+}
+
+function Body({ data, render }) {
+  return <StyledBody>{data.map(render)}</StyledBody>;
+}
+
+function Row({ children }) {
+  const { columns } = useContext(TableContext);
+
+  return (
+    <StyledRow role="row" columns={columns}>
+      {children}
+    </StyledRow>
+  );
+}
+
+Table.Header = Header;
+Table.Body = Body;
+Table.Row = Row;
+Table.Footer = Footer;

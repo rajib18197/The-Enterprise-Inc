@@ -9,14 +9,15 @@
 }
 
 .filterButton {
-  background-color: var(--color-grey-0);
+  /* background-color: var(--color-grey-0); */
+  background: none;
   border: none;
 
   border-radius: var(--border-radius-sm);
   font-weight: 500;
   font-size: 1.4rem;
   /* To give the same height as select */
-  padding: 1rem 2.5rem;
+  padding: 1rem 2rem;
   transition: all 0.3s;
 }
 
@@ -37,7 +38,8 @@
 }
 
 .roundOptions {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
   gap: 2rem;
 }
 

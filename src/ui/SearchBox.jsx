@@ -39,7 +39,7 @@ export default function SearchBox() {
             .filter((t) => t.text)
             .map((tab) => (
               <button key={tab.text}>{tab.text}</button>
-            ))}
+            ))} 
           <button>Search</button>
         </div>
       ) : (

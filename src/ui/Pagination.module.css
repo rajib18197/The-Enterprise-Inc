@@ -1,0 +1,43 @@
+.pagination {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  justify-content: space-between;
+
+  /* background-color: var(--color-grey-100); */
+  color: rgb(0, 0, 0);
+  /* padding: 1.4rem; */
+  border-radius: 4px;
+}
+.paginationMain {
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+}
+.pagination button {
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100px;
+  background-color: var(--color-brand-600);
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.paginationBtn button {
+  background-color: var(--color-red-700);
+}
+
+.paginationPages {
+  display: flex;
+  gap: 0.6rem;
+}
+.paginationText {
+  color: var(--color-grey-600);
+  font-weight: 600;
+}
+
+.pagination button.current {
+  background-color: var(--color-brand-600);
+}

@@ -1,3 +1,11 @@
+import SignupForm from "../features/authentication/SignupForm";
+import Heading from "../ui/Heading";
+
 export default function Users() {
-  return <div>Users Sign up Page</div>;
+  return (
+    <>
+      <Heading as="h3">Create New User</Heading>
+      <SignupForm />
+    </>
+  );
 }

@@ -1,8 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 
 export function useFilterHomes(homes) {
-  // filters
+  console.log(homes);
   const [searchParams] = useSearchParams();
+  if (!homes) return [];
+  // if(!homes)
+  // filters
 
   // 1) beds, bedrooms, baths
   let obj = {};

@@ -1,24 +1,32 @@
 import { useState } from "react";
 
-const rates = [
-  { half: 0.5, full: 1 },
-  { half: 1.5, full: 2 },
-  { half: 2.5, full: 3 },
-  { half: 3.5, full: 4 },
-  { half: 4.5, full: 5 },
-];
+const makeRating = function (number) {
+  return Array.from({ length: number }, (_, i) => ({
+    half: i + 1 - 0.5,
+    full: i + 1,
+  }));
+};
 
-export default function StarRating() {
-  const [rating, setRating] = useState(0);
+export default function StarRating({
+  initialRating = 0,
+  onSetRate,
+  maxRatingNumber,
+}) {
+  const rates = makeRating(maxRatingNumber);
+
+  console.log(rates);
+  const [rating, setRating] = useState(initialRating);
   const [tempRating, setTempRating] = useState(0);
 
   return (
     <StarContainer>
       <StarList
+        rates={rates}
         rating={rating}
         onRating={setRating}
         tempRating={tempRating}
         onTempRating={setTempRating}
+        onSetRateOutside={onSetRate}
       />
       <Text>{tempRating || rating || ""}</Text>
     </StarContainer>
@@ -26,10 +34,11 @@ export default function StarRating() {
 }
 
 const starContainerStyle = {
-  width: "50rem",
-  height: "20rem",
-  background: "#101d28",
+  width: "100%",
+  height: "6rem",
+  background: "var(--color-grey-800)",
   color: "white",
+  borderRadius: "3px",
   display: "flex",
   gap: "1rem",
   alignItems: "center",
@@ -48,7 +57,14 @@ const starListStyle = {
   width: "80%",
 };
 
-function StarList({ rating, onRating, tempRating, onTempRating }) {
+function StarList({
+  rates,
+  rating,
+  onRating,
+  tempRating,
+  onTempRating,
+  onSetRateOutside,
+}) {
   return (
     <div style={starListStyle}>
       {rates.map((rate) => (
@@ -57,6 +73,7 @@ function StarList({ rating, onRating, tempRating, onTempRating }) {
           rate={rate}
           rating={rating}
           onRating={(r) => onRating(r)}
+          onSetRateOutside={onSetRateOutside}
           tempRating={tempRating}
           onTempRating={(r) => onTempRating(r)}
           isFull={tempRating ? tempRating >= rate.full : rating >= rate.full}
@@ -72,11 +89,20 @@ const starStyle = {
 };
 
 const iconStyle = {
-  width: "4.8rem",
-  height: "4.8rem",
+  width: "3.2rem",
+  height: "3.2rem",
+  color: "var(--color-brand-600)",
 };
 
-function Star({ rate, rating, onRating, tempRating, onTempRating, isFull }) {
+function Star({
+  rate,
+  rating,
+  onRating,
+  tempRating,
+  onTempRating,
+  isFull,
+  onSetRateOutside,
+}) {
   const isHalf = tempRating === rate.half || rating === rate.half;
 
   function handleRate(e) {
@@ -87,10 +113,12 @@ function Star({ rate, rating, onRating, tempRating, onTempRating, isFull }) {
 
     if (clickedCoords - leftCoords < Math.floor(coords.width / 2)) {
       onRating(rate.half);
+      onSetRateOutside(rate.half);
       return;
     }
 
     onRating(rate.full);
+    onSetRateOutside(rate.full);
   }
 
   function handleEnter(e) {

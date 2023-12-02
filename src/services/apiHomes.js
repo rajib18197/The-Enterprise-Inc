@@ -7,6 +7,8 @@ export async function getHomes() {
   // console.log(apartments);
   // setHomes(apartments);
   // one image can have in many houses
+
+
   let { data: images, error } = await supabase
     .from("Images")
     .select("*, Apartments(*)");

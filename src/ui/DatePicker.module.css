@@ -1,0 +1,67 @@
+.datePicker{
+    position: fixed;
+
+    background-color: var(--color-grey-0);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 2.2rem 2rem;
+    transition: all 0.5s;
+    width: 80rem;
+    z-index: 2000;
+    /* display: flex; */
+    /* gap: 1rem; */
+    overflow: hidden;
+    height: 25rem;
+}
+
+.month{
+    /* display: inline-block; */
+    /* flex: 0 0 48%; */
+    /* width: 45%; */
+    height: 25rem;
+    transition: all 1s ease-in;
+}
+
+.intro{
+    display: flex;
+}
+
+.intro h4{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.weekdays{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+
+.days{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1rem;
+}
+
+.days button{
+    display: block;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 100px;
+    background-color: var(--color-brand-700);
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.loop{
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: all .4s cubic-bezier(0.86, 0, 0.07, 1);
+}

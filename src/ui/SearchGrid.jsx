@@ -8,7 +8,15 @@ import Button from "./Button";
 
 export default function SearchGrid({ tabs, initialTab }) {
   const [activeTab, setActiveTab] = useState(initialTab);
-  console.log(activeTab);
+  const [position,setPosition] = useState({x: 0, y: 0});
+
+  function handleClick(e,index){
+    // console.log(e.target.closest('.box-search'));
+    const coords = e.target.closest('.box-search').getBoundingClientRect();
+    console.log(coords);
+    setPosition({x: coords.x, y: coords.y + coords.height + 8})
+    setActiveTab(index)
+  }
 
   return createPortal(
     <div className={styles.searchGrid}>
@@ -19,21 +27,21 @@ export default function SearchGrid({ tabs, initialTab }) {
             name={tab.title}
             placeholder={tab.label}
             readOnly={tab.readOnly}
-            onClick={() => setActiveTab(i)}
+            onClick={(e) => handleClick(e,i)}
             isLastIndex={i === tabs.length - 1}
             active={activeTab === i}
           />
         ))}
       </div>
 
-      <div className={`${styles.content} ${styles[`content--${activeTab}`]}`}>
-        {/* {tabs[activeTab].title.toLowerCase() === "where" && <SelectRegion />}
+      {/* <div className={`${styles.content} ${styles[`content--${activeTab}`]}`}> */}
+        {tabs[activeTab].title.toLowerCase() === "where" && <SelectRegion position={position} />}
         {(tabs[activeTab].title.toLowerCase() === "check in" ||
         tabs[activeTab].title.toLowerCase() === "check out") && (
-          <DatePicker />
-        )} */}
-        {tabs[activeTab].title.toLowerCase() === "who" && <AddGuest />}
-      </div>
+          <DatePicker position={position} />
+        )}
+        {tabs[activeTab].title.toLowerCase() === "who" && <AddGuest position={position} />}
+      {/* </div> */}
     </div>,
     document.body
   );
@@ -49,7 +57,7 @@ function SearchButtonBox({
   children,
 }) {
   return (
-    <div className={styles.searchDestination} onClick={onClick}>
+    <div className={`${styles.searchDestination} box-search`} onClick={onClick}>
       <button
         className={`${styles.btnGrid} ${active ? styles.searchDestActive : ""}`}
       >

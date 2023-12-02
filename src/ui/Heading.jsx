@@ -1,9 +1,12 @@
+import styled, { css } from "styled-components";
+
 const Heading = styled.h1`
   ${(props) =>
     props.as === "h1" &&
     css`
       font-size: 3rem;
       font-weight: 600;
+      color: #e11d48;
     `}
 
   ${(props) =>
@@ -11,6 +14,7 @@ const Heading = styled.h1`
     css`
       font-size: 2rem;
       font-weight: 600;
+      color: #e11d48;
     `}
     
     ${(props) =>
@@ -18,6 +22,7 @@ const Heading = styled.h1`
     css`
       font-size: 2rem;
       font-weight: 500;
+      color: #e11d48;
     `}
     
   line-height: 1.4;

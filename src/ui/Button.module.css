@@ -20,6 +20,10 @@
   font-weight: 500;
 }
 
+.special{
+  padding: 0;
+}
+
 .large {
   font-size: 1.6rem;
   padding: 1.2rem 2.4rem;

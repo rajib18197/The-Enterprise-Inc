@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 import Counter from "./Counter";
 import styles from "./AddGuest.module.css";
 
-export default function AddGuest() {
+export default function AddGuest({position}) {
   const data = [
     { label: "Adults", labelRange: "Ages 13 or above" },
     { label: "Children", labelRange: "Ages 2-12" },
@@ -11,7 +11,7 @@ export default function AddGuest() {
   ];
 
   return (
-    <div className={styles.addGuest}>
+    <div className={styles.addGuest} style={{left: `${position.x}px`, top: `${position.y}px`}}>
       {data.map((d) => (
         <div className={styles.container}>
           <Counter key={d.label}>

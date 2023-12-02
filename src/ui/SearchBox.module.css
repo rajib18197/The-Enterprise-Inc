@@ -84,6 +84,9 @@
   flex-direction: column;
   gap: 0.2rem;
 }
+.btnGrid:nth-child(4){
+  border-right: none;
+}
 
 .searchDestActive {
   background-color: var(--color-brand-700);
@@ -102,6 +105,7 @@
 
 .content {
   position: relative;
+  width: 100%;
 }
 
 .content--0 {
