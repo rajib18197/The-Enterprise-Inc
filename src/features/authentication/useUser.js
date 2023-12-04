@@ -11,7 +11,7 @@ export default function useUser() {
     queryFn: getCurrentUser,
   });
 
-  console.log(user);
+  // console.log(user);
 
   return {
     user,

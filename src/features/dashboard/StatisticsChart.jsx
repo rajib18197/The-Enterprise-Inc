@@ -19,9 +19,10 @@ import { useRecentApplications } from "./useRecentApplications";
 
 const ChartBox = styled.div`
   /* Box */
-  background-color: var(--color-grey-200);
-  background-color: #ffe4e6;
-  border: 1px solid var(--color-grey-100);
+  /* background-color: var(--color-grey-200); */
+  /* background-color: #ffded6; // #fdf2e9 */
+  box-shadow: var(--shadow-xl);
+  /* border: 1px solid var(--color-grey-100); */
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
@@ -76,9 +77,9 @@ const startDataLight = [
 // }]
 
 const JobList = [
+  { value: "backend-engineer", label: "Backend Engineer" },
   { value: "frontend-engineer", label: "Frontend Engineer" },
   { value: "solution-architect", label: "Solution Architect" },
-  { value: "backend-engineer", label: "Backend Engineer" },
   { value: "lead-software-architect", label: "Lead Software Architect" },
   { value: "uiux-engineer", label: "UI/UX Engineer" },
   { value: "software-engineer", label: "Software Engineer" },
@@ -205,7 +206,11 @@ export default function StatisticsChart({ jobs, applications }) {
   return (
     <ChartBox>
       {/* <Filter options={JobList} /> */}
-      <SelectedFilter field={"jobtype"} options={JobList} />
+      <SelectedFilter
+        field={"jobtype"}
+        options={JobList}
+        includeHiddenElement={false}
+      />
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie

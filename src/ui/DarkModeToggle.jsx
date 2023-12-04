@@ -39,11 +39,11 @@ const ToggleButton = styled.button`
   font-weight: 600;
   text-align: center;
   border: none;
+  outline: none;
   border-radius: var(--border-radius-sm);
-  box-shadow: var(--shadow-sm);
 
-  color: var(--color-brand-800);
-  background-color: var(--color-red-100);
+  color: #160d0d;
+  /* background-image: linear-gradient(to right bottom, #2998ff, #5643fa); */
 
   & svg {
     width: 2.1rem;
@@ -51,6 +51,10 @@ const ToggleButton = styled.button`
   }
   &:hover {
     background-color: var(--color-grey-200);
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 

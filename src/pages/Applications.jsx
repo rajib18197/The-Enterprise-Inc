@@ -16,8 +16,7 @@ const Box = styled.div`
   flex-direction: column;
   gap: 2rem;
   padding: 1rem 2rem;
-  box-shadow: 0 0 0 transparent, 0 0 0 transparent,
-    0 0 3rem rgba(76, 103, 150, 0.3);
+  box-shadow: var(--shadow-xl);
   border-radius: 0.3rem;
 `;
 
@@ -31,7 +30,7 @@ export default function Applications() {
     <Container>
       <Box>
         <Row>
-          <Heading as='h1'>All Applications</Heading>
+          <Heading as="h1">All Applications</Heading>
           {/* <SearchBox /> */}
           <AddApplication />
         </Row>

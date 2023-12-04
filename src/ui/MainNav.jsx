@@ -14,9 +14,8 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  // background-color: var(--color-red-700);
   height: 100%;
-  padding: 1rem 0 0 0;
+  padding: 0 0 0 0;
 `;
 const NavList = styled.ul`
   display: flex;

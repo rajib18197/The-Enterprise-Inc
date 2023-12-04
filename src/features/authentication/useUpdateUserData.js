@@ -23,11 +23,11 @@ export function useUpdateUserData() {
   return { updateUser, isLoading, error };
 }
 
-async function getUserData() {
-  const { data, error } = await supabase.auth.admin.getUserById(
-    "e54a88fc-e5e2-4d58-a274-44d1c2de4ca4"
-  );
-  console.log(data);
-}
+// async function getUserData() {
+//   const { data, error } = await supabase.auth.admin.getUserById(
+//     "e54a88fc-e5e2-4d58-a274-44d1c2de4ca4"
+//   );
+//   console.log(data);
+// }
 
-getUserData()
+// getUserData()

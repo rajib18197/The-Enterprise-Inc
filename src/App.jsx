@@ -18,6 +18,9 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import Users from "./pages/Users";
 import Account from "./pages/Account";
 import Settings from "./pages/Settings";
+import TableSort from "./ui/TableSort";
+import ReusableInput from "./ui/ReusableInput";
+import Paginations from "./ui/Paginations";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +53,17 @@ export default function App() {
               <Route path="users" element={<Users />} />
               <Route path="account" element={<Account />} />
               <Route path="settings" element={<Settings />} />
+              {/* Test */}
+              <Route
+                path="resuabletable"
+                element={
+                  <>
+                    {/* <TableSort /> */}
+                    {/* <ReusableInput /> */}
+                    <Paginations />
+                  </>
+                }
+              />
             </Route>
             <Route path="login" element={<Login />} />
           </Routes>

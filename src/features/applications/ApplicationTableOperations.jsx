@@ -14,11 +14,9 @@ const StyledApplicationTableOperations = styled.div`
 const Box = styled.div`
   flex: 1;
   padding: 0.4rem;
-  border: 1px solid var(--color-grey-100);
-
-  border: 1px solid var(--color-grey-100);
   background-color: var(--color-grey-0);
-  box-shadow: var(--shadow-sm);
+  /* box-shadow: var(--shadow-sm); */
+  border-radius: 3px;
 `;
 
 const Button = styled.button`

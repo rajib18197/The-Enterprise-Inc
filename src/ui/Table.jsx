@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 const StyledTable = styled.div`
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  box-shadow: var(--shadow-xl);
   font-size: 1.4rem;
   background-color: var(--color-grey-0);
   border-radius: 7px;
@@ -18,10 +19,10 @@ const CommonRow = styled.div`
 `;
 
 const StyledHeader = styled(CommonRow)`
-  padding: 1rem 2.4rem;
+  padding: 1.8rem 2.4rem;
 
   background-color: var(--color-grey-50);
-  border-bottom: 1px solid var(--color-grey-100);
+  /* border-bottom: 1px solid var(--color-grey-100); */
   text-transform: uppercase;
   letter-spacing: 0.4px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
@@ -40,11 +41,12 @@ const StyledRow = styled(CommonRow)`
   &:nth-child(odd) {
     background-color: var(--color-red-100);
     /* background-color: #fee2e2; */
-    color: #4b5563;
+    /* color: #4b5563; */
+    /* color: #f6f9ff; */
   }
 
   &:nth-child(odd) :first-child {
-    color: #4b5563;
+    /* color: #4b5563; */
   }
 `;
 

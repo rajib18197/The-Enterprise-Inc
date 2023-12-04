@@ -37,13 +37,13 @@ export async function logout() {
 
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
-  console.log(session);
+  // console.log(session);
   if (!session.session) return null;
 
   const { data, error } = await supabase.auth.getUser();
 
   if (error) throw new Error(error);
-  console.log(data);
+  // console.log(data);
 
   return data?.user;
 }
@@ -72,7 +72,9 @@ export async function updateUserData({ fullName, password, avatar }) {
 
   // 3) Update User Profile data
   const { data: updatedData, error: error2 } = await supabase.auth.updateUser({
-    data: { avatar: `${SUPABASE_URL}/storage/v1/object/public/avatar/${fileName}` },
+    data: {
+      avatar: `${SUPABASE_URL}/storage/v1/object/public/avatar/${fileName}`,
+    },
   });
 
   console.log(updatedData);

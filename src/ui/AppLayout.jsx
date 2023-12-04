@@ -8,6 +8,7 @@ const StyledAppLayout = styled.div`
   grid-template-columns: 8rem 1fr;
   grid-template-rows: auto 1fr;
   height: 100vh;
+  gap: 1rem;
   // padding: 2rem;
   // width: 120rem;
   // margin: 0 auto;
@@ -21,6 +22,23 @@ const Main = styled.main`
   grid-column: 2 / -1;
   grid-row: 2 / -1;
   overflow-y: scroll;
+  box-shadow: var(--shadow-xl);
+  border-radius: var(--border-radius-lm);
+
+  overflow-y: scroll;
+  height: calc(100vh - 11vh - 4rem);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-silver-700);
+    border-radius: 4px;
+  }
 `;
 
 const Container = styled.div`

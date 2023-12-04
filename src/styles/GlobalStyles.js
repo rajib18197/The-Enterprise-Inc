@@ -37,9 +37,12 @@ const GlobalStyles = createGlobalStyle`
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
     --shadow-md: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
     --shadow-lg: 0 2.4rem 3.2rem rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 0 0 transparent, 0 0 0 transparent,
+    0 0 3rem rgba(76, 103, 150, 0.2);
   
     --border-radius-tiny: 3px;
     --border-radius-sm: 3px;
+    --border-radius-lm: 5px;
     --border-radius-md: 7px;
     --border-radius-lg: 9px;
 
@@ -74,6 +77,7 @@ const GlobalStyles = createGlobalStyle`
     --color-indigo-700: #e0e7ff;
     
     --color-red-100: #fee2e2;
+    --color-red-100: #121212;
     --color-red-700: #b91c1c;
     --color-red-800: #991b1b;
     
@@ -117,12 +121,15 @@ html {
 body {
   font-family: 'Rubik', sans-serif;
   color: var(--color-grey-700);
+  padding: 1rem;
 
   transition: color 0.3s, background-color 0.3s;
+  background-image: linear-gradient(to right bottom, #FF3366, #BA265D);
   min-height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;
-  background-color: #fffffe;
+  overflow: hidden;
+  /* background-color: #fffffe; */
 }
 
 input,

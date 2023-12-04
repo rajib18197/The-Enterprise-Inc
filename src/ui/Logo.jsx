@@ -5,10 +5,10 @@ const StyledLogo = styled.div`
 `;
 
 const Img = styled.img`
-  height: 6.6rem;
-  width: 4.6rem;
+  height: 6.2rem;
+  width: 4.2rem;
 `;
- 
+
 function Logo() {
   return (
     <StyledLogo>

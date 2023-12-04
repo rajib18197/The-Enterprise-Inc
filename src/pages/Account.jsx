@@ -8,12 +8,10 @@ export default function Account() {
     <>
       <Heading as="h1">Update your Account</Heading>
       <Row>
-        <Heading as="h3">Update User Data</Heading>
         <UpdateUserDataForm />
       </Row>
 
       <Row>
-        <Heading as="h3">Update User Password</Heading>
         <UpdatePasswordForm />
       </Row>
     </>

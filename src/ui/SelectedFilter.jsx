@@ -1,7 +1,11 @@
 import { useSearchParams } from "react-router-dom";
 import Select from "./Select";
 
-export default function SelectedFilter({ field, options }) {
+export default function SelectedFilter({
+  field,
+  options,
+  includeHiddenElement,
+}) {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedValue = searchParams.get(field) || "";
 
@@ -11,6 +15,11 @@ export default function SelectedFilter({ field, options }) {
   }
 
   return (
-    <Select options={options} value={selectedValue} onChange={handleSelect} />
+    <Select
+      options={options}
+      value={selectedValue}
+      onChange={handleSelect}
+      includeHiddenElement={includeHiddenElement}
+    />
   );
 }

@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 const StyledStat = styled.div`
   /* Box */
-  background-color: var(--color-red-100);
-  background-color: #ffe4e6;
-  border: 1px solid var(--color-grey-100);
+  /* background-color: ${(props) => props.bgcolor}; */
+  /* border: 1px solid var(--color-grey-100); */
   border-radius: var(--border-radius-md);
 
   padding: 1.6rem;
@@ -14,6 +13,9 @@ const StyledStat = styled.div`
   align-items: center;
   column-gap: 1.6rem;
   row-gap: 0.4rem;
+  box-shadow: var(--shadow-xl);
+  /* box-shadow: 0 0 0 transparent, 0 0 0 transparent,
+    0 0 3rem rgba(76, 103, 150, 0.3); */
 `;
 
 const Icon = styled.div`
@@ -40,7 +42,7 @@ const Title = styled.h5`
   text-transform: uppercase;
   letter-spacing: 0.4px;
   font-weight: 600;
-  color: var(--color-grey-500);
+  color: var(--color-grey-600);
 `;
 
 const Value = styled.p`
@@ -50,10 +52,10 @@ const Value = styled.p`
 `;
 
 export default function Stat({ stat }) {
-  const { icon, title, color, value } = stat;
+  const { icon, title, color, value, bgcolor } = stat;
 
   return (
-    <StyledStat>
+    <StyledStat bgcolor={bgcolor}>
       <Icon color={color}>{icon}</Icon>
       <Title>{title}</Title>
       <Value>{value}</Value>

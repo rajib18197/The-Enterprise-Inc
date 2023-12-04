@@ -16,9 +16,11 @@ import { useRecentJobs } from "./useRecentJobs";
 const StyledAllJobInfoChart = styled.div`
   grid-column: 1 / -1;
 
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
+  /* background-color: var(--color-grey-0); */
+  /* border: 1px solid var(--color-grey-100); */
   border-radius: var(--border-radius-md);
+
+  box-shadow: var(--shadow-xl);
 
   padding: 3.2rem;
 

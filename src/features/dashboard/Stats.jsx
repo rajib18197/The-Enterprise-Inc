@@ -30,6 +30,7 @@ export default function Stats({ jobs, applications }) {
           color: "blue",
           title: "Total Job Post",
           value: numJobPost,
+          bgcolor: "#ffc9c9",
         }}
       />
 
@@ -39,6 +40,7 @@ export default function Stats({ jobs, applications }) {
           color: "green",
           title: "Total Submission",
           value: numSubmission,
+          bgcolor: "#fcc2d7",
         }}
       />
 
@@ -48,6 +50,8 @@ export default function Stats({ jobs, applications }) {
           color: "indigo",
           title: "Total Selected",
           value: numSelected,
+          bgcolor: "linear-gradient(to right bottom, #2998ff, #5643fa)",
+          bgcolor: "#eebafe",
         }}
       />
     </StyledStats>

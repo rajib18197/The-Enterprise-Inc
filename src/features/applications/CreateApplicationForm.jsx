@@ -9,6 +9,7 @@ import { useCreateApplication } from "./useCreateApplication";
 import Checkbox from "../../ui/Checkbox";
 import { useUpdateApplication } from "./useUpdateApplication";
 import { SUPABASE_URL } from "../../services/supabase";
+import Input from "../../ui/Input";
 
 const transformer = function (obj, name, email) {
   // const str = `${obj[name].toLowerCase().split(' ').join('-')}-${obj[email].toLowerCase()}`
@@ -168,7 +169,7 @@ export default function CreateApplicationForm({
       </FormRow>
 
       <FormRow label="Submission Date">
-        <input
+        <Input
           type="date"
           value={submittedDate}
           onChange={(e) => setSubmittedDate(e.target.value)}
@@ -185,7 +186,7 @@ export default function CreateApplicationForm({
       </FormRow>
 
       <FormRow label="Special Mention">
-        <input
+        <Input
           type="text"
           value={specialMention}
           onChange={(e) => setSpecialMention(e.target.value)}
@@ -220,7 +221,7 @@ export default function CreateApplicationForm({
       </FormRow>
 
       <FormRow label="salary expectation">
-        <input
+        <Input
           type="number"
           value={salaryExpectation}
           onChange={(e) => setSalaryExpectation(Number(e.target.value))}

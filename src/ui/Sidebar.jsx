@@ -7,18 +7,16 @@ import DarkModeToggle from "./DarkModeToggle";
 const StyledSidebar = styled.aside`
   background-color: #f5f5f5;
   background-color: var(--color-grey-100);
-  // padding: 1rem 0;
-  border-right: 1px solid var(--color-grey-100);
-
-  // grid-row: 1 / -1;
+  height: 95vh;
+  border-radius: var(--border-radius-lm);
   grid-row: 1 / -1;
   grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 `;
 const Box = styled.div`
-  margin-top: auto;
+  /* margin-top: auto; */
   // margin-bottom: 1rem;
 `;
 

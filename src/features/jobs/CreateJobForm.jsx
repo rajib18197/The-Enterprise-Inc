@@ -85,7 +85,7 @@ export default function CreateJobForm({ jobToUpdate = {}, onCloseModal }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} type={onCloseModal ? "modal" : "regular"}>
       <FormRow label={"Job Title"}>
         <Input
           type="text"
@@ -131,7 +131,7 @@ export default function CreateJobForm({ jobToUpdate = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow label="Start Date">
-        <input
+        <Input
           type="date"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
@@ -139,7 +139,7 @@ export default function CreateJobForm({ jobToUpdate = {}, onCloseModal }) {
       </FormRow>
 
       <FormRow label="End Date">
-        <input
+        <Input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}

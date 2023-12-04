@@ -4,7 +4,7 @@ import Heading from "../ui/Heading";
 export default function Settings() {
   return (
     <>
-      <Heading as="h1">Update Job Settings</Heading>
+      <Heading as="h2">Update Job Settings</Heading>
       <UpdateSettingForm />
     </>
   );
