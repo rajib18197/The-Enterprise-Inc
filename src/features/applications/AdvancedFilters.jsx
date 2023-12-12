@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FilterBox, FilterCheck, FilterRound } from "../../ui/Filter";
 import Heading from "../../ui/Heading";
+import { useSearchParams } from "react-router-dom";
 
 const StyledAdvancedFilters = styled.div`
   display: flex;
@@ -44,11 +45,10 @@ const Row = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-
 `;
 
 const Footer = styled.footer`
-display: flex;
+  display: flex;
   justify-content: space-between;
   padding: 1rem;
 `;
@@ -67,6 +67,8 @@ const Button = styled.button`
 `;
 
 export default function AdvancedFilters() {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const combined = [
     { experience: "junior", salaryExpectationRange: { min: 1000, max: 1999 } },
     { experience: "junior", salaryExpectationRange: { min: 2000, max: 2999 } },
@@ -98,9 +100,8 @@ export default function AdvancedFilters() {
   ];
 
   const status = [
-    { value: "scheduled", label: "Schedulued" },
     { value: "interviewing", label: "Interviewing" },
-    { value: "hired", label: "Hired" },
+    { value: "selected", label: "Selected" },
     { value: "under-review", label: "Under review" },
   ];
 
@@ -135,7 +136,19 @@ export default function AdvancedFilters() {
       </Main>
 
       <Footer>
-        <Button>clear Filters</Button>
+        <Button
+          onClick={() => {
+            searchParams.delete("experience");
+            searchParams.delete("salaryExpectationRange");
+            searchParams.delete("essentials");
+            searchParams.delete("type");
+            searchParams.delete("status");
+
+            setSearchParams(searchParams);
+          }}
+        >
+          clear Filters
+        </Button>
       </Footer>
     </StyledAdvancedFilters>
   );

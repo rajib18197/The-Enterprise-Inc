@@ -1,3 +1,4 @@
+import ContainerBox from "../../ui/ContainerBox";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
@@ -17,7 +18,7 @@ export default function UpdateSettingForm() {
   if (isLoading) return <Spinner />;
 
   function handleBlur(e) {
-    console.log({[e.target.name]: e.target.value});
+    console.log({ [e.target.name]: e.target.value });
     updateSetting({
       [e.target.name]: e.target.name.startsWith("extra")
         ? e.target.value
@@ -26,50 +27,52 @@ export default function UpdateSettingForm() {
   }
 
   return (
-    <Form>
-      <FormRow label="Extra Round">
-        <Input
-          type="text"
-          id="extra-round"
-          name="extraRound"
-          defaultValue={extraRound}
-          onBlur={handleBlur}
-          disabled={isUpdating}
-        />
-      </FormRow>
+    <ContainerBox>
+      <Form>
+        <FormRow label="Extra Round">
+          <Input
+            type="text"
+            id="extra-round"
+            name="extraRound"
+            defaultValue={extraRound}
+            onBlur={handleBlur}
+            disabled={isUpdating}
+          />
+        </FormRow>
 
-      <FormRow label="Minimum Duration/Round">
-        <Input
-          type="number"
-          id="min-duration"
-          name="minDuration"
-          defaultValue={minDuration}
-          onBlur={handleBlur}
-          disabled={isUpdating}
-        />
-      </FormRow>
+        <FormRow label="Minimum Duration/Round">
+          <Input
+            type="number"
+            id="min-duration"
+            name="minDuration"
+            defaultValue={minDuration}
+            onBlur={handleBlur}
+            disabled={isUpdating}
+          />
+        </FormRow>
 
-      <FormRow label="Maximum Duration/Round">
-        <Input
-          type="number"
-          id="max-duration"
-          name="maxDuration"
-          defaultValue={maxDuration}
-          onBlur={handleBlur}
-          disabled={isUpdating}
-        />
-      </FormRow>
+        <FormRow label="Maximum Duration/Round">
+          <Input
+            type="number"
+            id="max-duration"
+            name="maxDuration"
+            defaultValue={maxDuration}
+            onBlur={handleBlur}
+            disabled={isUpdating}
+          />
+        </FormRow>
 
-      <FormRow label="Performance Rating">
-        <Input
-          type="number"
-          id="rating"
-          name="performanceRatings"
-          defaultValue={performanceRatings}
-          onBlur={handleBlur}
-          disabled={isUpdating}
-        />
-      </FormRow>
-    </Form>
+        <FormRow label="Performance Rating">
+          <Input
+            type="number"
+            id="rating"
+            name="performanceRatings"
+            defaultValue={performanceRatings}
+            onBlur={handleBlur}
+            disabled={isUpdating}
+          />
+        </FormRow>
+      </Form>
+    </ContainerBox>
   );
 }

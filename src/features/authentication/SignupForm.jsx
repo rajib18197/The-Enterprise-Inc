@@ -7,6 +7,7 @@ import Button from "../../ui/Button";
 import SpinnerMini from "../../ui/SpinnerMini";
 import Section from "../../ui/Section";
 import Heading from "../../ui/Heading";
+import ContainerBox from "../../ui/ContainerBox";
 const INITIAL_STATE = {
   fullName: "",
   email: "",
@@ -38,48 +39,50 @@ export default function SignupForm() {
   );
 
   return (
-    <Section header={Header}>
-      <Form onSubmit={handleSubmit}>
-        <FormRow label="Full name" orientation="horizontal">
-          <Input
-            type="text"
-            id="fullName"
-            name="fullName"
-            value={fullName}
-            onChange={handleChange}
-          />
-        </FormRow>
+    <ContainerBox>
+      <Section header={Header}>
+        <Form onSubmit={handleSubmit}>
+          <FormRow label="Full name" orientation="horizontal">
+            <Input
+              type="text"
+              id="fullName"
+              name="fullName"
+              value={fullName}
+              onChange={handleChange}
+            />
+          </FormRow>
 
-        <FormRow label="Email">
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </FormRow>
+          <FormRow label="Email">
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+            />
+          </FormRow>
 
-        <FormRow label="password">
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </FormRow>
+          <FormRow label="password">
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+          </FormRow>
 
-        <FormRow label="Repeat Password">
-          <Input
-            type="password"
-            id="repeat-password"
-            name="repeatPassword"
-            value={repeatPassword}
-            onChange={handleChange}
-          />
-        </FormRow>
-      </Form>
-    </Section>
+          <FormRow label="Repeat Password">
+            <Input
+              type="password"
+              id="repeat-password"
+              name="repeatPassword"
+              value={repeatPassword}
+              onChange={handleChange}
+            />
+          </FormRow>
+        </Form>
+      </Section>
+    </ContainerBox>
   );
 }

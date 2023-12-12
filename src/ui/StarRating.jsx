@@ -1,166 +1,159 @@
 import { useState } from "react";
+import { IoStarHalfSharp, IoStarOutline, IoStarSharp } from "react-icons/io5";
+import styled, { css } from "styled-components";
+import Error from "./Error";
 
-const makeRating = function (number) {
-  return Array.from({ length: number }, (_, i) => ({
-    half: i + 1 - 0.5,
-    full: i + 1,
-  }));
+const StyledStarRating = styled.div`
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+`;
+
+const StarsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+const Text = styled.p`
+  font-size: 1.6rem;
+  font-weight: 600;
+`;
+
+const StyledStar = styled.div`
+  cursor: pointer;
+
+  transition: all 2s;
+  & svg {
+    ${(props) =>
+      props.color
+        ? css`
+            fill: ${props.color};
+          `
+        : css`
+            fill: #40fa40;
+          `}
+    width: 3rem;
+    height: 3rem;
+    transition: all 2s;
+  }
+`;
+
+const createStars = function (size) {
+  const stars = Array.from({ length: size }, (_, i) => {
+    return { id: i + 1, half: i + 0.5, full: i + 1 };
+  });
+
+  return stars;
+};
+
+const createLabelsObj = function (labels = [], maxRating = 5) {
+  const arr = Array.from({ length: maxRating }, (_, i) => i + 1);
+
+  const obj = arr.reduce((acc, cur, i) => {
+    acc[cur - 0.5] = labels[cur - 1 + i];
+    acc[cur] = labels[cur + i];
+    return acc;
+  }, {});
+
+  console.log(obj);
+
+  return obj;
 };
 
 export default function StarRating({
   initialRating = 0,
-  onSetRate,
-  maxRatingNumber,
+  maxRating = 5,
+  color = "",
+  labels = [],
+  onSetRating = () => {},
 }) {
-  const rates = makeRating(maxRatingNumber);
-
-  console.log(rates);
   const [rating, setRating] = useState(initialRating);
   const [tempRating, setTempRating] = useState(0);
 
+  if (labels.length && labels.length !== maxRating * 2) {
+    return <Error msg={"Max Rating must be half of labels length."} />;
+  }
+
+  function handleRateClick(rate) {
+    setRating(rate);
+    onSetRating(rate);
+  }
+
+  const stars = createStars(maxRating);
+
+  const labelsObj = labels.length
+    ? createLabelsObj(labels, maxRating)
+    : undefined;
+
   return (
-    <StarContainer>
-      <StarList
-        rates={rates}
-        rating={rating}
-        onRating={setRating}
-        tempRating={tempRating}
-        onTempRating={setTempRating}
-        onSetRateOutside={onSetRate}
-      />
-      <Text>{tempRating || rating || ""}</Text>
-    </StarContainer>
+    <StyledStarRating>
+      <StarsContainer>
+        {stars.map((star) => (
+          <Star
+            key={star.id}
+            color={color}
+            star={star}
+            rating={rating}
+            onRate={handleRateClick}
+            tempRating={tempRating}
+            onTempRating={setTempRating}
+          />
+        ))}
+      </StarsContainer>
+      <Text>
+        {labelsObj
+          ? labelsObj[tempRating] || labelsObj[rating] || ""
+          : tempRating || rating || ""}
+      </Text>
+    </StyledStarRating>
   );
 }
 
-const starContainerStyle = {
-  width: "100%",
-  height: "6rem",
-  background: "var(--color-grey-800)",
-  color: "white",
-  borderRadius: "3px",
-  display: "flex",
-  gap: "1rem",
-  alignItems: "center",
-  padding: "3rem",
-  //   justifyContent: "center",
+const isClicked = function (targetElement, clickedPosition) {
+  const coords = targetElement.getBoundingClientRect();
+  const distance = clickedPosition - coords.left;
+  const starHalfWidth = coords.width / 2;
+  // console.log(distance, starHalfWidth);
+  return distance <= starHalfWidth;
 };
 
-function StarContainer({ children }) {
-  return <div style={starContainerStyle}>{children}</div>;
-}
+function Star({ star, rating, onRate, tempRating, onTempRating, color }) {
+  function handleClick(e) {
+    const distance = isClicked(e.target, e.clientX);
 
-const starListStyle = {
-  display: "flex",
-  alignItems: "center",
-  gap: ".6rem",
-  width: "80%",
-};
-
-function StarList({
-  rates,
-  rating,
-  onRating,
-  tempRating,
-  onTempRating,
-  onSetRateOutside,
-}) {
-  return (
-    <div style={starListStyle}>
-      {rates.map((rate) => (
-        <Star
-          key={rate.half}
-          rate={rate}
-          rating={rating}
-          onRating={(r) => onRating(r)}
-          onSetRateOutside={onSetRateOutside}
-          tempRating={tempRating}
-          onTempRating={(r) => onTempRating(r)}
-          isFull={tempRating ? tempRating >= rate.full : rating >= rate.full}
-        />
-      ))}
-    </div>
-  );
-}
-
-const starStyle = {
-  display: "block",
-  cursor: "pointer",
-};
-
-const iconStyle = {
-  width: "3.2rem",
-  height: "3.2rem",
-  color: "var(--color-brand-600)",
-};
-
-function Star({
-  rate,
-  rating,
-  onRating,
-  tempRating,
-  onTempRating,
-  isFull,
-  onSetRateOutside,
-}) {
-  const isHalf = tempRating === rate.half || rating === rate.half;
-
-  function handleRate(e) {
-    const coords = e.target.getBoundingClientRect();
-    const leftCoords = coords.x;
-    const clickedCoords = e.clientX;
-    console.log(clickedCoords - leftCoords, coords);
-
-    if (clickedCoords - leftCoords < Math.floor(coords.width / 2)) {
-      onRating(rate.half);
-      onSetRateOutside(rate.half);
-      return;
-    }
-
-    onRating(rate.full);
-    onSetRateOutside(rate.full);
+    distance ? onRate(star.half) : onRate(star.full);
   }
 
-  function handleEnter(e) {
-    const coords = e.target.getBoundingClientRect();
-    const leftCoords = coords.x;
-    const clickedCoords = e.clientX;
+  function handleMouseMove(e) {
+    const distance = isClicked(e.target, e.clientX);
 
-    if (clickedCoords - leftCoords <= Math.floor(coords.width / 2)) {
-      onTempRating(rate.half);
-      return;
-    }
+    distance ? onTempRating(star.half) : onTempRating(star.full);
+  }
 
-    onTempRating(rate.full);
+  function handleMouseOut() {
+    onTempRating(0);
   }
 
   return (
-    <span
+    <StyledStar
+      color={color}
       role="button"
-      style={starStyle}
-      onClick={handleRate}
-      onMouseMove={handleEnter}
-      onMouseOut={() => onTempRating(0)}
+      onClick={handleClick}
+      onMouseMove={handleMouseMove}
+      onMouseOut={handleMouseOut}
     >
-      {!isFull && !isHalf && (
-        <ion-icon name="star-outline" style={iconStyle}></ion-icon>
-      )}
+      {tempRating
+        ? tempRating !== star.half &&
+          tempRating < star.full && <IoStarOutline />
+        : rating !== star.half && rating < star.full && <IoStarOutline />}
 
-      {isFull && <ion-icon name="star" style={iconStyle}></ion-icon>}
+      {tempRating
+        ? tempRating === star.half && <IoStarHalfSharp />
+        : rating === star.half && <IoStarHalfSharp />}
 
-      {isHalf && (
-        <ion-icon name="star-half-outline" style={iconStyle}></ion-icon>
-      )}
-    </span>
+      {tempRating
+        ? tempRating !== star.half && tempRating >= star.full && <IoStarSharp />
+        : rating !== star.half && rating >= star.full && <IoStarSharp />}
+    </StyledStar>
   );
-}
-
-const textStyle = {
-  fontSize: "1.6rem",
-  fontWeight: "600",
-  textTransform: "uppercase",
-};
-
-function Text({ children }) {
-  return <p style={textStyle}>{children}</p>;
 }

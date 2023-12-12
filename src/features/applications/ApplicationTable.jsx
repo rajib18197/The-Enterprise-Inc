@@ -3,13 +3,21 @@ import { useApplications } from "./useApplications";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import ApplicationRow from "./ApplicationRow";
+import Spinner from "../../ui/Spinner";
+import Empty from "../../ui/Empty";
+import Error from "../../ui/Error";
 
 export default function ApplicationList() {
-  const { isPending, applications, count } = useApplications();
-  console.log(applications);
-  console.log(count);
+  const { isPending, applications, isError, count } = useApplications();
 
-  if (!applications?.length) return <h3>No Application found</h3>;
+  if (isPending) return <Spinner />;
+
+  if (!applications?.length) return <Empty resource={"Applications"} />;
+
+  if (isError)
+    return (
+      <Error msg="There is an error occurred while fetching candidates applications. Please try again :)" />
+    );
 
   return (
     <Menus>
@@ -17,7 +25,7 @@ export default function ApplicationList() {
         <Table.Header>
           <div>Job</div>
           <div>Candidate</div>
-          <div>Dates</div>
+          <div>Submitted Date</div>
           <div>Status / Special Mention</div>
           <div>Resume</div>
           <div></div>

@@ -18,12 +18,12 @@ const StyledFormRow = styled.div`
     padding-bottom: 0;
   }
 
-  &:not(:last-child) {
+  /* &:not(:last-child) {
     border-bottom: ${(props) =>
-      props.orientation === "vertical"
-        ? "none"
-        : "1px solid var(--color-grey-100)"};
-  }
+    props.orientation === "vertical"
+      ? "none"
+      : "1px solid var(--color-grey-100)"};
+  } */
 
   /* Special treatment if the row contains buttons, and if it's NOT a vertical row */
   ${(props) =>

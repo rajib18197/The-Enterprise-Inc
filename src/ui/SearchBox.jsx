@@ -1,55 +1,52 @@
-import { useRef, useState } from "react";
-import styles from "./SearchBox.module.css";
-import { createPortal } from "react-dom";
-import SearchGrid from "./searchGrid";
+import styled from "styled-components";
 
-const tabs = [
-  {
-    title: "Where",
-    label: "Search destination",
-    readOnly: false,
-    text: "Any where",
-  },
-  { title: "Check in", label: "Add Dates", readOnly: true, text: "Any week" },
-  { title: "Check out", label: "Add Dates", readOnly: true },
-  { title: "Who", label: "Add Guests", readOnly: true, text: "Add guests" },
-];
+const InputSearch = styled.input`
+  justify-self: center;
+  border: none;
+  padding: 1.1rem 1.6rem;
+  font-size: 1.8rem;
+  border-radius: 0.4rem;
+  width: 40rem;
+  transition: all 0.3s;
+  color: var(--color-grey-600);
+  /* outline: 2px solid #3d67ff;
+  outline-offset: 2px; */
 
-export default function SearchBox() {
-  const [isOpenSearch, setIsOpenSearch] = useState(false);
-  const [initialActiveTab, setInitialActiveTab] = useState(null);
+  /* background-color: var(--color-background-900); */
+  background-color: var(--color-grey-200);
 
-  function handleOpen(e) {
-    console.log(e.target);
-    const index = tabs.findIndex(
-      (t) =>
-        t.text?.trim().toLowerCase() ===
-        e.target.textContent.trim().toLowerCase()
-    );
-    console.log(index);
-    setIsOpenSearch((open) => !open);
-    setInitialActiveTab(index);
+  &::placeholder {
+    color: var(--color-text-dark);
   }
 
+  &:focus {
+    outline: none;
+    box-shadow: 0 1.4rem 2.4rem rgba(224, 216, 216, 0.445);
+    transform: translateY(-2px);
+  }
+`;
+
+export default function SearchBox({ value, onChange }) {
+  function handleChange(fn, seconds) {
+    let id;
+    return (value) => {
+      if (id) clearTimeout(id);
+
+      id = setTimeout(() => {
+        fn(value);
+      }, seconds);
+    };
+  }
+
+  const onValue = handleChange(onChange, 500);
+
   return (
-    <div className={styles.search}>
-      {!isOpenSearch ? (
-        <div className={styles.searchControllers} onClick={handleOpen}>
-          {tabs
-            .filter((t) => t.text)
-            .map((tab) => (
-              <button key={tab.text}>{tab.text}</button>
-            ))} 
-          <button>Search</button>
-        </div>
-      ) : (
-        <>
-          <div className={styles.searchTab}>
-            <button>Stays</button>
-          </div>
-          <SearchGrid tabs={tabs} initialTab={initialActiveTab} />
-        </>
-      )}
+    <div>
+      <InputSearch
+        placeholder="Search"
+        defaultValue={value}
+        onChange={(e) => onValue(e.target.value)}
+      />
     </div>
   );
 }

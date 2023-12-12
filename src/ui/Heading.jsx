@@ -24,6 +24,23 @@ const Heading = styled.h1`
       font-weight: 500;
       color: #e11d48;
     `}
+
+    ${(props) =>
+    props.as === "h4" &&
+    css`
+      font-size: 4rem;
+      font-weight: 500;
+      font-family: "Josefin Sans", sans-serif;
+      /* color: #e11d48; */
+    `}
+    ${(props) =>
+    props.as === "h5" &&
+    css`
+      font-size: 2rem;
+      font-weight: 500;
+      font-family: "Josefin Sans", sans-serif;
+      /* color: #e11d48; */
+    `}
     
   line-height: 1.4;
 `;

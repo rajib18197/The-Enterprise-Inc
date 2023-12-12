@@ -1,8 +1,31 @@
 import { getToday } from "../utils/helpers";
 import { supabase } from "./supabase";
 
-export async function getAllJobs() {
-  const { data: jobs, error } = await supabase.from("jobs").select("*");
+export async function getAllJobs({ page, searchValue } = {}) {
+  console.log(searchValue, "api call");
+
+  let query = supabase.from("jobs").select("*");
+
+  if (page) {
+    const from = (page - 1) * 5;
+    const to = from - 1 + 5;
+    query = query.range(from, to);
+  }
+
+  if (searchValue !== "") {
+    // Match a invidual string/word (use textSearch)
+    // query = query.textSearch("title", searchValue, {
+    //   // type: "websearch",
+    //   type: "phrase",
+    //   config: "english",
+    // });
+
+    // Match a individual letter (use ilike or like)
+    query = query.ilike("title", `%${searchValue}%`);
+  }
+
+  const { data: jobs, error } = await query;
+
   console.log(jobs);
   if (error) {
     console.log(error);

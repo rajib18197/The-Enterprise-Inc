@@ -12,6 +12,7 @@ import CreateJobForm from "./CreateJobForm";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteJob } from "./useDeleteJob";
 import { useCreateJob } from "./useCreateJob";
+import { Fragment, forwardRef } from "react";
 
 const Job = styled.div`
   font-size: 1.6rem;
@@ -46,12 +47,13 @@ const Benefit = styled.div`
   text-transform: capitalize;
 `;
 
-export default function JobRow({ job }) {
+function JobRow({ job }, ref) {
   const { id, title, type, salary, experience, status, benefit } = job;
   const { deleteJob, isDeleting } = useDeleteJob();
   const { createJob, isCreating } = useCreateJob();
 
   return (
+    // <div ref={ref}>
     <Table.Row>
       <Job>{title}</Job>
       <Type>{type}</Type>
@@ -98,7 +100,9 @@ export default function JobRow({ job }) {
         </Modal>
       </div>
     </Table.Row>
+    // </div>
   );
 }
 
+export default forwardRef(JobRow);
 // total Interviews - total selections

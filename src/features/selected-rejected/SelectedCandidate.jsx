@@ -18,6 +18,7 @@ import useSetting from "../settings/useSetting";
 import StarRating from "../../ui/StarRating";
 import Modal from "../../ui/Modal";
 import { useParams } from "react-router-dom";
+import Observation from "../../ui/Observation";
 
 const StyledRemarks = styled.div`
   display: grid;
@@ -155,7 +156,12 @@ export default function SelectedCandidate() {
         },
       });
     } else {
-      selected({ id: applicationDetails.id, addExtraRound: {}, rating });
+      selected({
+        id: applicationDetails.id,
+        addExtraRound: {},
+        rating,
+        observations,
+      });
     }
   }
   const {
@@ -186,18 +192,32 @@ export default function SelectedCandidate() {
       </Stacked>
 
       <Stacked variation="vertical" type="full">
-        <Heading>Some Observations</Heading>
-        <TextArea
-          value={observations}
-          onChange={(e) => setObservations(e.target.value)}
-        />
+        <Heading as={"h3"}>
+          Write some observations about this candidate (at max 4 sentences or
+          less) &mdash; For a line break, add two blank spaces at the end of the
+          line.
+        </Heading>
+        <Observation onSetObservations={setObservations} />
       </Stacked>
 
       <Stacked>
         <StarRating
-          initialRating={rating}
+          initialRating={4}
+          color={"var(--color-brand-600)"}
           onSetRate={setRating}
-          maxRatingNumber={performanceRatings}
+          maxRating={performanceRatings}
+          labels={[
+            "Useless",
+            "Useless+",
+            "Poor",
+            "Poor+",
+            "Ok",
+            "Ok+",
+            "Good",
+            "Good+",
+            "Excellent",
+            "Excellent+",
+          ]}
         />
       </Stacked>
 

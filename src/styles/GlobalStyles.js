@@ -125,6 +125,13 @@ body {
 
   transition: color 0.3s, background-color 0.3s;
   background-image: linear-gradient(to right bottom, #FF3366, #BA265D);
+  /* background-image: linear-gradient(to right bottom, #ffc9c9, #BA265D); */
+  /* background-image: linear-gradient(to right, rgba(193, 85, 197, 0.6), rgba(140, 40, 180, 0.6)); */
+  /* background-image: linear-gradient(rgba(115, 0, 57), rgba(115, 0, 57)); */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  /* background-color: #eebafe; */
   min-height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;

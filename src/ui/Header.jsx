@@ -32,20 +32,22 @@ const Menu = styled.div`
   ${(props) =>
     props.darkmode === "true"
       ? css`
-          background: linear-gradient(to right bottom, #ddd6f3, #faaca8);
+          /* background: linear-gradient(to right bottom, #ddd6f3, #faaca8);
           background: linear-gradient(to right bottom, #2998ff, #5643fa);
-          background-image: linear-gradient(to right bottom, #ff3366, #ba265d);
+          background-image: linear-gradient(to right bottom, #ff3366, #ba265d); */
+          /* background-color: #101d38; */
         `
       : css`
-          background: linear-gradient(to right bottom, #ee9ca7, #ffdde1);
+          /* background: linear-gradient(to right bottom, #ee9ca7, #ffdde1);
           background: linear-gradient(to right bottom, #2998ff, #5643fa);
-          background-image: linear-gradient(to right bottom, #ff3366, #ba265d);
+          background-image: linear-gradient(to right bottom, #ff3366, #ba265d); */
+          /* background-color: #101d38; */
         `}
 
   backdrop-filter: blur(0.6rem);
   width: max-content;
   border-radius: 100px;
-  padding: 0.6rem 2rem;
+  padding: 0.2rem 2rem;
   z-index: 100;
 
   & > *:first-child {
@@ -58,6 +60,7 @@ const BrandName = styled.div`
   grid-template-columns: max-content max-content max-content;
   gap: 3rem;
   align-items: center;
+
   /* justify-items: center; */
   /* background-color: aliceblue; */
   //   align-content: center;
@@ -68,9 +71,9 @@ const BrandName = styled.div`
   &::after,
   &::before {
     content: "";
-    width: 45px;
-    height: 4px;
-    background-color: orangered;
+    width: 75px;
+    height: 3px;
+    background-color: var(--color-brand-600);
   }
 `;
 
@@ -81,13 +84,13 @@ function Header() {
   return (
     <StyledHeader>
       <BrandName>
-        <Heading>The Enterprise Inc.</Heading>
+        <Heading as="h4">The Enterprise Inc.</Heading>
       </BrandName>
       <Menu darkmode={isDarkMode ? "true" : "false"}>
         <UserAvatar />
-        <div>
+        {/* <div>
           <Logout />
-        </div>
+        </div> */}
       </Menu>
     </StyledHeader>
   );

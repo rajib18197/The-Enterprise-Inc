@@ -7,6 +7,7 @@ import { useUpdateUserData } from "./useUpdateUserData";
 import SpinnerMini from "../../ui/SpinnerMini";
 import Heading from "../../ui/Heading";
 import Section from "../../ui/Section";
+import ContainerBox from "../../ui/ContainerBox";
 
 export default function UpdatePasswordForm() {
   const [newPassword, setNewPassword] = useState("");
@@ -35,32 +36,34 @@ export default function UpdatePasswordForm() {
   );
 
   return (
-    <Section header={Header}>
-      <Form onSubmit={handleSubmit}>
-        <FormRow label="New Password (Min 8 Chars)">
-          <Input
-            type="password"
-            id="password"
-            name="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            disabled={isLoading}
-          />
-        </FormRow>
+    <ContainerBox>
+      <Section header={Header}>
+        <Form onSubmit={handleSubmit}>
+          <FormRow label="New Password (Min 8 Chars)">
+            <Input
+              type="password"
+              id="password"
+              name="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              disabled={isLoading}
+            />
+          </FormRow>
 
-        <FormRow label="Confirm Password">
-          <Input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            disabled={isLoading}
-          />
-        </FormRow>
+          <FormRow label="Confirm Password">
+            <Input
+              type="password"
+              id="confirm-password"
+              name="confirm-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              disabled={isLoading}
+            />
+          </FormRow>
 
-        <input type="submit" value="button" hidden />
-      </Form>
-    </Section>
+          <input type="submit" value="button" hidden />
+        </Form>
+      </Section>
+    </ContainerBox>
   );
 }

@@ -13,7 +13,8 @@ export default function useLogin() {
   } = useMutation({
     mutationFn: loginApi,
     onSuccess({ user }) {
-      queryClient.setQueryData("user", user);
+      console.log(user);
+      queryClient.setQueryData(["user"], user);
       navigate("/dashboard");
     },
     onError(err) {

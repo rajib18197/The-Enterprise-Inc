@@ -2,13 +2,17 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import styled from "styled-components";
+import Logo from "./Logo";
 
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 8rem 1fr;
   grid-template-rows: auto 1fr;
-  height: 100vh;
-  gap: 1rem;
+  /* height: 100vh; */
+  /* background-color: #e7b24f;
+  padding: 2rem 0 0 0; */
+  /* border-radius: 4px; */
+  gap: 0.8rem;
   // padding: 2rem;
   // width: 120rem;
   // margin: 0 auto;
@@ -26,7 +30,7 @@ const Main = styled.main`
   border-radius: var(--border-radius-lm);
 
   overflow-y: scroll;
-  height: calc(100vh - 11vh - 4rem);
+  height: calc(100vh - 11vh - 3rem);
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -52,6 +56,7 @@ const Container = styled.div`
 function AppLayout() {
   return (
     <StyledAppLayout>
+      <Logo />
       <Header />
       <Sidebar />
       <Main>

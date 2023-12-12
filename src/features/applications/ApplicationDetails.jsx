@@ -16,6 +16,8 @@ import Spinner from "../../ui/Spinner";
 import { formatDate } from "../../utils/helpers";
 import { Flag } from "../../ui/Flag";
 import { useNavigate } from "react-router-dom";
+import ObservationBox from "../../ui/ObservationBox";
+import { Fragment } from "react";
 
 const StyledApplicationDetails = styled.div`
   //   margin-top: -1.5rem;
@@ -124,52 +126,6 @@ const Salary = styled.p`
   //   justify-self: end;
 `;
 
-const Talk = styled.div`
-  box-shadow: 0 0 0 transparent, 0 0 0 transparent,
-    0 0 3rem rgba(76, 103, 150, 0.3);
-  padding: 2rem;
-  display: grid;
-  //   grid-template-columns: 5fr 1fr;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  border-left: 4px solid orangered;
-  font-size: 1.7rem;
-`;
-
-const Aside = styled.div`
-  padding: 2rem;
-  //   grid-column:
-
-  position: relative;
-  z-index: 100;
-
-  &::before,
-  &::after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
-  &::before {
-    width: 45%;
-    padding-bottom: 45%;
-    background-color: #fdf2e9;
-    background-color: #111827;
-    background-color: var(--color-grey-100);
-    z-index: -2;
-  }
-  &::after {
-    width: 30%;
-    padding-bottom: 30%;
-    background-color: #fae5d3;
-    background-color: var(--color-silver-100);
-    z-index: -1;
-  }
-`;
-
 const Box = styled.div`
   display: flex;
   align-items: center;
@@ -180,18 +136,6 @@ const Box = styled.div`
   background-color: var(--color-brand-600);
   color: white;
   border-radius: 4px;
-
-  // & > *:first-child, & > *:nth-child(2){
-  //   flex: 1.2;
-  // }
-  // & > *:nth-child(3){
-  //   flex: .6;
-  // }
-`;
-
-const Observation = styled.p`
-  white-space: break-spaces;
-  color: var(--color-grey-600);
 `;
 
 const PDFView = styled.embed`
@@ -237,6 +181,12 @@ export default function ApplicationDetails() {
   console.log(applicationDetails);
 
   console.log(observations);
+  const TransformObservations = observations?.split("<br />").map((el, i) => (
+    <Fragment key={i}>
+      {el}
+      <br />
+    </Fragment>
+  ));
   const naviagate = useNavigate();
 
   if (isLoading) return <Spinner />;
@@ -304,11 +254,8 @@ export default function ApplicationDetails() {
               <DataItem icon={<HiAdjustmentsHorizontal />} label={experience} />
             </Box>
           </CandidateDescription>
-          <Aside>
-            <Talk>
-              <Observation>{observations}</Observation>
-            </Talk>
-          </Aside>
+
+          <ObservationBox text={TransformObservations} />
         </DetailsBox>
       </StyledApplicationDetails>
     </>

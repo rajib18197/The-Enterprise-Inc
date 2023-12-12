@@ -7,9 +7,9 @@ import DarkModeToggle from "./DarkModeToggle";
 const StyledSidebar = styled.aside`
   background-color: #f5f5f5;
   background-color: var(--color-grey-100);
-  height: 95vh;
+  /* height: 95vh; */
   border-radius: var(--border-radius-lm);
-  grid-row: 1 / -1;
+  grid-row: 2 / -1;
   grid-column: 1 / span 1;
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@ const Box = styled.div`
 function Sidebar() {
   return (
     <StyledSidebar>
-      <Logo />
+      {/* <Logo /> */}
       <MainNav />
       <Box>
         <DarkModeToggle />

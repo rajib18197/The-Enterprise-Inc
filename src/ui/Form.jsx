@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Form = styled.form`
   ${(props) =>
-    props.scrolling === 'true' &&
+    props.scrolling === "true" &&
     css`
       overflow-y: scroll;
       height: 70vh;
@@ -26,7 +26,13 @@ const Form = styled.form`
 
       /* Box */
       background-color: var(--color-grey-0);
-      border: 1px solid var(--color-grey-100);
+      /* background-image: linear-gradient(
+        260deg,
+        #da96fc 0%,
+        #7344ff 50%,
+        #da96fc 80%
+      ); */
+      /* border: 1px solid var(--color-grey-100); */
       border-radius: var(--border-radius-md);
     `}
 
@@ -38,6 +44,7 @@ const Form = styled.form`
     
   // overflow: hidden;
   font-size: 1.4rem;
+  box-shadow: 0 3.2rem 0 -1.8rem #f7b2b2;
 `;
 
 export default Form;

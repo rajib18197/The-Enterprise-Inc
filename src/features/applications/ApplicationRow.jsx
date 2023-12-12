@@ -127,13 +127,14 @@ export default function ApplicationRow({ application }) {
       </Stacked>
 
       <Stacked>
+        <span>Submitted {formatDate(new Date(submittedDate))}</span>
         <span>
-          Submitted {formatDate(new Date(submittedDate))} &rarr; Open for{" "}
-          {formatDistance(startDate, endDate)} days
+          (
+          {`${formatDate(new Date(startDate))} - ${formatDate(
+            new Date(endDate)
+          )}`}
+          ) &rarr; Open for {formatDistance(startDate, endDate)} days
         </span>
-        <span>{`${formatDate(new Date(startDate))} - ${formatDate(
-          new Date(endDate)
-        )}`}</span>
         {/* <span>{formatDate(new Date(endDate))}</span> */}
       </Stacked>
       <Tag type={statusToTagName[status]}>

@@ -18,8 +18,13 @@ export function useHomes() {
 
 export function useApplications({ flag = true } = {}) {
   const [searchParams] = useSearchParams();
+  console.log(searchParams);
   const filterValues = [];
-  // if(searchParams.get(''))
+  for (const [key, value] of searchParams) {
+    console.log(key);
+    console.log(value);
+  }
+
   for (const [key, value] of searchParams) {
     if (key.startsWith("salary") || key.startsWith("experience")) {
       filterValues.push({
@@ -93,11 +98,14 @@ export function useApplications({ flag = true } = {}) {
     data: { applications, count } = {},
     isPending,
     isError,
+    error,
   } = useQuery({
     queryKey: ["applications", filters, currentPage],
     queryFn: () => getApplications({ filters, currentPage }),
+    retry: false,
   });
 
+  console.log(error);
   return { isPending, applications, isError, count };
 }
 
