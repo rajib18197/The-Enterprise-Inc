@@ -3,34 +3,12 @@ import styled from "styled-components";
 
 import { useTheme } from "../context/ThemeContext";
 
-// const Toggle = styled.div`
-//   background-color: red;
-//   // display: flex;
-//   padding: 1.2rem 2.4rem;
-//   // flex-direction: column;
-//   // gap: 1rem;
-//   // align-items: center;
-//   // justify-content: center;
-//   // font-weight: 600;
-//   // width: 100%;
-// `;
-
-// const Box = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 1rem;
-//   align-items: center;
-//   justify-content: center;
-//   font-weight: 600;
-//   width: 100%;
-// `;
-
 const ToggleButton = styled.button`
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
-  justify-content: center;
+  justify-content: end;
   width: 100%;
   // height: 100%;
   font-size: 1.2rem;
@@ -55,6 +33,14 @@ const ToggleButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 60rem) {
+    flex-direction: row;
+  }
+
+  @media (max-width: 45em) {
+    justify-content: center;
   }
 `;
 

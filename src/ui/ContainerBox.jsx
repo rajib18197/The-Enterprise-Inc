@@ -20,13 +20,10 @@ const Box = styled.div`
   row-gap: 6rem;
   column-gap: 2rem;
   border-radius: 0.8rem;
-  /******************
- Responsiveness
-******************/
-  //932px
-  @media screen and (max-width: 58.25em) {
-    grid-template-columns: 1fr;
-    row-gap: 4rem;
+  @media (max-width: 38em) {
+    padding: 1rem;
+    justify-content: start;
+    align-content: start;
   }
 `;
 

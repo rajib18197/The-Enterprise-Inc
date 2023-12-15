@@ -9,7 +9,7 @@ import {
   HiXMark,
 } from "react-icons/hi2";
 import Menus from "../../ui/Menus";
-import Table from "../../ui/Table";
+import Table, { TableContainer } from "../../ui/Table";
 import ColumnMenus from "../../ui/ColumnMenus";
 import { useSearchParams } from "react-router-dom";
 import { useCallback, useRef, useState } from "react";
@@ -129,66 +129,68 @@ export default function JobTable({ searchValue = "" }) {
 
   return (
     <Menus>
-      <Table columns="1.8fr 1fr 1fr 1.2fr 1fr 1.4fr .4fr">
-        <Table.Header>
-          <ColumnMenus>
-            {headerColumns.map((column) => (
-              <ColumnMenus.Menu key={column}>
-                <ColumnMenus.Toggle opens={column}>
-                  <HeaderColumnName>{column}</HeaderColumnName>
-                  <span>
-                    {field === column ? (
-                      direction === "asc" ? (
-                        <HiArrowUp />
+      <TableContainer>
+        <Table columns="1.8fr 1fr 1fr 1.2fr 1fr 1.4fr .4fr">
+          <Table.Header>
+            <ColumnMenus>
+              {headerColumns.map((column) => (
+                <ColumnMenus.Menu key={column}>
+                  <ColumnMenus.Toggle opens={column}>
+                    <HeaderColumnName>{column}</HeaderColumnName>
+                    <span>
+                      {field === column ? (
+                        direction === "asc" ? (
+                          <HiArrowUp />
+                        ) : (
+                          <HiArrowDown />
+                        )
                       ) : (
-                        <HiArrowDown />
-                      )
-                    ) : (
-                      <HiChevronUpDown />
-                    )}
-                  </span>
-                </ColumnMenus.Toggle>
+                        <HiChevronUpDown />
+                      )}
+                    </span>
+                  </ColumnMenus.Toggle>
 
-                <ColumnMenus.List windowName={column}>
-                  <ColumnMenus.Button
-                    icon={<HiArrowDown />}
-                    sortBy={{ label: column, direction: "asc" }}
-                  >
-                    Asc
-                  </ColumnMenus.Button>
-                  <ColumnMenus.Button
-                    icon={<HiArrowUp />}
-                    sortBy={{ label: column, direction: "desc" }}
-                  >
-                    Desc
-                  </ColumnMenus.Button>
-                  <ColumnMenus.Button
-                    icon={<HiXMark />}
-                    sortBy={{ label: column, direction: "clear" }}
-                  >
-                    Clear
-                  </ColumnMenus.Button>
-                </ColumnMenus.List>
-              </ColumnMenus.Menu>
-            ))}
+                  <ColumnMenus.List windowName={column}>
+                    <ColumnMenus.Button
+                      icon={<HiArrowDown />}
+                      sortBy={{ label: column, direction: "asc" }}
+                    >
+                      Asc
+                    </ColumnMenus.Button>
+                    <ColumnMenus.Button
+                      icon={<HiArrowUp />}
+                      sortBy={{ label: column, direction: "desc" }}
+                    >
+                      Desc
+                    </ColumnMenus.Button>
+                    <ColumnMenus.Button
+                      icon={<HiXMark />}
+                      sortBy={{ label: column, direction: "clear" }}
+                    >
+                      Clear
+                    </ColumnMenus.Button>
+                  </ColumnMenus.List>
+                </ColumnMenus.Menu>
+              ))}
 
-            <div></div>
-          </ColumnMenus>
-        </Table.Header>
+              <div></div>
+            </ColumnMenus>
+          </Table.Header>
 
-        <Table.Body
-          data={sortedJobs}
-          render={(job, i) => {
-            // if (i === sortedJobs.length - 1) {
-            //   return <JobRow key={job.id} job={job} ref={lastJobRowRef} />;
-            // }
+          <Table.Body
+            data={sortedJobs}
+            render={(job, i) => {
+              // if (i === sortedJobs.length - 1) {
+              //   return <JobRow key={job.id} job={job} ref={lastJobRowRef} />;
+              // }
 
-            return <JobRow key={job.id} job={job} />;
-          }}
-        />
+              return <JobRow key={job.id} job={job} />;
+            }}
+          />
 
-        {/* {isLoading && <Spinner />} */}
-      </Table>
+          {/* {isLoading && <Spinner />} */}
+        </Table>
+      </TableContainer>
     </Menus>
   );
 }

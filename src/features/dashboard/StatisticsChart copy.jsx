@@ -2,15 +2,25 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  // Cell,
+  Legend,
+  // Pie,
+  // PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-
 import styled from "styled-components";
+import Filter from "../../ui/Filter";
+import Select from "../../ui/Select";
 import SelectedFilter from "../../ui/SelectedFilter";
 import { useSearchParams } from "react-router-dom";
+import { useJobs } from "../jobs/useJobs";
+import Spinner from "../../ui/Spinner";
+import { useApplications } from "../applications/useApplications";
+import { useRecentJobs } from "./useRecentJobs";
+import { useRecentApplications } from "./useRecentApplications";
 
 const ChartBox = styled.div`
   /* Box */
@@ -21,10 +31,10 @@ const ChartBox = styled.div`
   border-radius: var(--border-radius-md);
 
   padding: 2.4rem 3.2rem;
-  /* grid-column: 2 / -1;
+  grid-column: 2 / -1;
   grid-column: 1 / -1;
   grid-row: 1 / span 1;
-  grid-row: 2 / span 1; */
+  grid-row: 2 / span 1;
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -202,21 +212,80 @@ export default function StatisticsChart({ jobs, applications }) {
 
   return (
     <ChartBox>
+      {/* <Filter options={JobList} /> */}
       <SelectedFilter
         field={"jobtype"}
         options={JobList}
         includeHiddenElement={false}
       />
-
-      <ResponsiveContainer height={300} width="100%">
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="4" />
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          // width={}
+          height={240}
+          data={data}
+          // dataKey={"value"}
+          // nameKey={"statName"}
+          // margin={{
+          //   top: 20,
+          //   right: 30,
+          //   left: 20,
+          //   bottom: 5,
+          // }}
+          // cx="40%"
+          // cy="50%"
+          // paddingAngle={3}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="statName" />
-          <YAxis unit="#" />
-          <Tooltip />
-          <Bar dataKey="value" fill="#e02bf8" />
+          <YAxis dataKey="value" />
+          <Tooltip contentStyle={{ backgroundColor: "orange" }} />
+          <Legend layout="horizontal" iconSize={15} iconType="circle" />
+          {data.map((entry) => (
+            <Bar
+              fill={entry.color}
+              // stroke={entry.color}
+              key={entry.statName}
+              dataKey={entry.statName}
+              stackId="a"
+            />
+          ))}
+          {/* <Bar dataKey="pv" stackId="a" fill="#8884d8" />
+          <Bar dataKey="amt" stackId="a" fill="#82ca9d" />
+          <Bar dataKey="uv" fill="#ffc658" /> */}
         </BarChart>
       </ResponsiveContainer>
+
+      {/* <ResponsiveContainer width="100%" height={240}>
+        <PieChart>
+          <Pie
+            data={data}
+            nameKey={"statName"}
+            dataKey={"value"}
+            innerRadius={85}
+            outerRadius={110}
+            cx="40%"
+            cy="50%"
+            paddingAngle={3}
+          >
+            {data.map((entry) => (
+              <Cell
+                fill={entry.color}
+                stroke={entry.color}
+                key={entry.statName}
+              />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend
+            verticalAlign="middle"
+            align="right"
+            width={"30%"}
+            layout="vertical"
+            iconSize={15}
+            iconType="circle"
+          />
+        </PieChart>
+      </ResponsiveContainer> */}
     </ChartBox>
   );
 }

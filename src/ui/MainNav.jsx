@@ -14,13 +14,16 @@ const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
-  padding: 0 0 0 0;
+  /* height: 100%; */
 `;
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
   // gap: 0.8rem;
+
+  @media (max-width: 60em) {
+    flex-direction: row;
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
@@ -44,6 +47,18 @@ const StyledNavLink = styled(NavLink)`
     // padding: .4rem;
     padding: 1.2rem 2.4rem;
     transition: all 0.3s;
+
+    @media (max-width: 60rem) {
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+      /* background-color: #f1b8a3; */
+      line-height: 1;
+    }
+
+    @media (max-width: 38em) {
+      flex-direction: column;
+    }
   }
 
   /* This works because react-router places the active class on the active NavLink */
@@ -83,7 +98,7 @@ function MainNav() {
         <li>
           <StyledNavLink to="/dashboard">
             <HiOutlineHome />
-            <span>Home</span>
+            <span>Dashboard</span>
           </StyledNavLink>
         </li>
         <li>

@@ -22,6 +22,17 @@ const StyledHeader = styled.header`
   height: 11vh;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 60em) {
+    padding: 0.6rem 1rem;
+    border-radius: 0;
+  }
+
+  @media (max-width: 45em) {
+    flex-direction: column;
+    height: 100%;
+    align-items: end;
+  }
 `;
 
 const Menu = styled.div`
@@ -61,19 +72,20 @@ const BrandName = styled.div`
   gap: 3rem;
   align-items: center;
 
-  /* justify-items: center; */
-  /* background-color: aliceblue; */
-  //   align-content: center;
-  /* width: 50%; */
-  /* margin: -0.4rem auto 0; */
-  //   background-color: orangered;
-
   &::after,
   &::before {
     content: "";
     width: 75px;
     height: 3px;
     background-color: var(--color-brand-600);
+
+    @media (max-width: 60em) {
+      width: 50px;
+    }
+  }
+
+  @media (max-width: 60em) {
+    gap: 1rem;
   }
 `;
 
@@ -88,9 +100,6 @@ function Header() {
       </BrandName>
       <Menu darkmode={isDarkMode ? "true" : "false"}>
         <UserAvatar />
-        {/* <div>
-          <Logout />
-        </div> */}
       </Menu>
     </StyledHeader>
   );

@@ -116,6 +116,16 @@ const GlobalStyles = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+/**************************/
+/* BELOW 1200px (Landscape Tablets) */
+/**************************/
+  @media (max-width: 75em){
+    font-size: 56.25%;
+  }
+
+  @media (max-width: 60em){
+    font-size: 50%;
+  }
 }
 
 body {
@@ -125,18 +135,21 @@ body {
 
   transition: color 0.3s, background-color 0.3s;
   background-image: linear-gradient(to right bottom, #FF3366, #BA265D);
-  /* background-image: linear-gradient(to right bottom, #ffc9c9, #BA265D); */
-  /* background-image: linear-gradient(to right, rgba(193, 85, 197, 0.6), rgba(140, 40, 180, 0.6)); */
-  /* background-image: linear-gradient(rgba(115, 0, 57), rgba(115, 0, 57)); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
   /* background-color: #eebafe; */
-  min-height: 100vh;
+  height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;
   overflow: hidden;
   /* background-color: #fffffe; */
+
+  @media (max-width: 60em){
+    /* height: auto; */
+    overflow: auto;
+    padding: 0;
+  }
 }
 
 input,

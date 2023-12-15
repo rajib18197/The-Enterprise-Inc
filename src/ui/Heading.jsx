@@ -10,6 +10,15 @@ const Heading = styled.h1`
     `}
 
   ${(props) =>
+    props.as === "h1" &&
+    props.showOnSmall === "false" &&
+    css`
+      @media (max-width: 38rem) {
+        display: none;
+      }
+    `}
+    
+  ${(props) =>
     props.as === "h2" &&
     css`
       font-size: 2.7rem;
@@ -32,6 +41,10 @@ const Heading = styled.h1`
       font-weight: 500;
       font-family: "Josefin Sans", sans-serif;
       /* color: #e11d48; */
+
+      @media (max-width: 60em) {
+        font-size: 3rem;
+      }
     `}
     ${(props) =>
     props.as === "h5" &&

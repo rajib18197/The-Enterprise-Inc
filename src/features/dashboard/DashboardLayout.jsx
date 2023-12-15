@@ -10,9 +10,13 @@ import { useRecentApplications } from "./useRecentApplications";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 34rem auto;
   gap: 2.4rem;
+
+  @media (max-width: 60em) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export default function DashboardLayout() {
@@ -26,9 +30,9 @@ export default function DashboardLayout() {
 
   return (
     <StyledDashboardLayout>
+      <StatisticsChart jobs={jobs} applications={applications} />
       <Stats jobs={jobs} applications={applications} />
       <AllJobInfoChart />
-      <StatisticsChart jobs={jobs} applications={applications} />
     </StyledDashboardLayout>
   );
 }

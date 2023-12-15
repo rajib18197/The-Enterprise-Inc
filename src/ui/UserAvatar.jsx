@@ -6,7 +6,7 @@ import Logout from "./Logout";
 const StyledUserAvatar = styled.div`
   display: flex;
   gap: 1.2rem;
-  /* align-items: center; */
+
   font-weight: 500;
   font-size: 1.4rem;
   color: var(--color-grey-600);
@@ -14,6 +14,10 @@ const StyledUserAvatar = styled.div`
 
   & span {
     font-weight: 600;
+  }
+
+  @media (max-width: 60em) {
+    align-items: center;
   }
 `;
 const Container = styled.div`
@@ -34,6 +38,10 @@ const Container = styled.div`
   border-radius: 0.3rem;
   outline: 2px solid #3d67ff;
   outline-offset: 2px;
+
+  @media (max-width: 60em) {
+    padding: 0.4rem 1rem;
+  }
 `;
 const AvatarContainer = styled.div`
   height: 4rem;
@@ -43,6 +51,15 @@ const AvatarContainer = styled.div`
   align-items: center;
   padding: 0.15rem;
   border-radius: 50%;
+
+  @media (max-width: 60em) {
+    height: 3rem;
+    width: 3rem;
+  }
+  @media (max-width: 45em) {
+    height: 4rem;
+    width: 4rem;
+  }
 `;
 
 const Avatar = styled.img`

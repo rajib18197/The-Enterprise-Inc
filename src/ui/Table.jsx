@@ -1,6 +1,13 @@
 import { createContext, useContext } from "react";
 import styled from "styled-components";
 
+export const TableContainer = styled.div`
+  @media (max-width: 44em) {
+    overflow-x: auto;
+    /* max-width: 60rem; */
+  }
+`;
+
 const StyledTable = styled.div`
   box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
   box-shadow: var(--shadow-xl);
@@ -8,6 +15,13 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+
+  @media (max-width: 44em) {
+    width: 100rem;
+  }
+  @media (max-width: 34em) {
+    width: 120rem;
+  }
 `;
 
 const CommonRow = styled.div`

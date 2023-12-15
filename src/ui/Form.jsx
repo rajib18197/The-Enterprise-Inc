@@ -23,6 +23,7 @@ const Form = styled.form`
     props.type !== "modal" &&
     css`
       padding: 2.4rem 4rem;
+      width: 85rem;
 
       /* Box */
       background-color: var(--color-grey-0);
@@ -34,6 +35,14 @@ const Form = styled.form`
       ); */
       /* border: 1px solid var(--color-grey-100); */
       border-radius: var(--border-radius-md);
+
+      @media (max-width: 60em) {
+        width: 60rem;
+      }
+
+      @media (max-width: 38em) {
+        width: 50rem;
+      }
     `}
 
   ${(props) =>
@@ -44,7 +53,7 @@ const Form = styled.form`
     
   // overflow: hidden;
   font-size: 1.4rem;
-  box-shadow: 0 3.2rem 0 -1.8rem #f7b2b2;
+  /* box-shadow: 0 3.2rem 0 -1.8rem #f7b2b2; */
 `;
 
 export default Form;

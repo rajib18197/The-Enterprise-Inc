@@ -14,6 +14,10 @@ const Box = styled.div`
   padding: 1rem 2rem;
   box-shadow: var(--shadow-xl);
   border-radius: 0.3rem;
+
+  @media (max-width: 60em) {
+    padding: 1rem;
+  }
 `;
 
 export default function Jobs() {
@@ -28,13 +32,14 @@ export default function Jobs() {
     <>
       <Box>
         <Row type="horizontal">
-          <Heading as={"h1"}>Jobs List</Heading>
+          <Heading as={"h1"} showOnSmall={"false"}>
+            Jobs List
+          </Heading>
           <SearchBox value={searchValue} onChange={handleSearch} />
           <AddJob />
         </Row>
-        {/* <Row type="horizontal"> */}
+
         <JobTableOperations />
-        {/* </Row> */}
       </Box>
       <Row>
         <JobTable searchValue={searchValue} />

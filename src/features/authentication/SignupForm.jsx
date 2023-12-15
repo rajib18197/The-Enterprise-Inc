@@ -32,7 +32,7 @@ export default function SignupForm() {
   const Header = (
     <>
       <Heading as="h2">Create New User</Heading>
-      <FormRow>
+      <FormRow orientation="horizontal">
         <Button>{isLoading ? <SpinnerMini /> : "Submit"}</Button>
       </FormRow>
     </>
@@ -42,7 +42,7 @@ export default function SignupForm() {
     <ContainerBox>
       <Section header={Header}>
         <Form onSubmit={handleSubmit}>
-          <FormRow label="Full name" orientation="horizontal">
+          <FormRow label="Full name">
             <Input
               type="text"
               id="fullName"

@@ -8,6 +8,11 @@ const StyledJobTableOperations = styled.div`
   gap: 1.6rem;
   padding: 0.8rem 0;
   border-radius: 5px;
+
+  @media (max-width: 44em) {
+    flex-direction: column;
+    align-items: end;
+  }
 `;
 
 const expSalaryoptions = [

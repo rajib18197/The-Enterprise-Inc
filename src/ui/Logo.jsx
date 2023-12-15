@@ -9,6 +9,10 @@ const StyledLogo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 60em) {
+    border-radius: 0;
+  }
 `;
 
 const Img = styled.img`

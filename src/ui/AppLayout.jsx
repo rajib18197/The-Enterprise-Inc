@@ -8,16 +8,11 @@ const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 8rem 1fr;
   grid-template-rows: auto 1fr;
-  /* height: 100vh; */
-  /* background-color: #e7b24f;
-  padding: 2rem 0 0 0; */
-  /* border-radius: 4px; */
   gap: 0.8rem;
-  // padding: 2rem;
-  // width: 120rem;
-  // margin: 0 auto;
-  // box-shadow: 6.2px 12.5px 12.5px hsl(0deg 0% 0% / 0.31);
-  // box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+
+  @media (max-width: 60em) {
+    gap: 0;
+  }
 `;
 
 const Main = styled.main`
@@ -29,8 +24,9 @@ const Main = styled.main`
   box-shadow: var(--shadow-xl);
   border-radius: var(--border-radius-lm);
 
-  overflow-y: scroll;
   height: calc(100vh - 11vh - 3rem);
+  /* height: 100%; */
+  overflow-y: scroll;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -43,11 +39,17 @@ const Main = styled.main`
     background-color: var(--color-silver-700);
     border-radius: 4px;
   }
+
+  @media (max-width: 60em) {
+    grid-row: 3 / span 1;
+    grid-column: 1 / -1;
+    height: auto;
+    border-radius: 0;
+    padding: 4rem 1rem 3.4rem;
+  }
 `;
 
 const Container = styled.div`
-  // max-width: 120rem;
-  // margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 3.2rem;

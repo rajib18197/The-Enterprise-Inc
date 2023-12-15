@@ -1,6 +1,6 @@
 import Pagination from "../../ui/Pagination";
 import { useApplications } from "./useApplications";
-import Table from "../../ui/Table";
+import Table, { TableContainer } from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import ApplicationRow from "./ApplicationRow";
 import Spinner from "../../ui/Spinner";
@@ -21,25 +21,27 @@ export default function ApplicationList() {
 
   return (
     <Menus>
-      <Table columns="1.2fr 1.2fr 2.4fr 1.8fr .6fr 3.2rem">
-        <Table.Header>
-          <div>Job</div>
-          <div>Candidate</div>
-          <div>Submitted Date</div>
-          <div>Status / Special Mention</div>
-          <div>Resume</div>
-          <div></div>
-        </Table.Header>
-        <Table.Body
-          data={applications}
-          render={(application) => (
-            <ApplicationRow key={application.id} application={application} />
-          )}
-        />
-        <Table.Footer>
-          <Pagination count={count} />
-        </Table.Footer>
-      </Table>
+      <TableContainer>
+        <Table columns="1.2fr 1.2fr 2.4fr 1.8fr .6fr 3.2rem">
+          <Table.Header>
+            <div>Job</div>
+            <div>Candidate</div>
+            <div>Submitted Date</div>
+            <div>Status / Special Mention</div>
+            <div>Resume</div>
+            <div></div>
+          </Table.Header>
+          <Table.Body
+            data={applications}
+            render={(application) => (
+              <ApplicationRow key={application.id} application={application} />
+            )}
+          />
+          <Table.Footer>
+            <Pagination count={count} />
+          </Table.Footer>
+        </Table>
+      </TableContainer>
     </Menus>
   );
 }
