@@ -17,7 +17,7 @@ export default function LoginForm() {
     login({ email, password });
   }
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} type="login">
       <FormRow label="Email address" orientation="vertical">
         <Input
           type="email"

@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
 const StyledSelect = styled.select`
@@ -14,16 +15,13 @@ const StyledSelect = styled.select`
   box-shadow: var(--shadow-sm);
 `;
 
-export default function Select({
-  label,
-  options,
-  value,
-  onChange,
-  includeHiddenElement = true,
-}) {
+function Select(
+  { label, options, value, onChange, includeHiddenElement = true, ...props },
+  ref
+) {
   console.log(value);
   return (
-    <StyledSelect value={value} onChange={onChange}>
+    <StyledSelect value={value} onChange={onChange} ref={ref} {...props}>
       {includeHiddenElement && (
         <option hidden value="" selected>
           Select {label}
@@ -37,3 +35,5 @@ export default function Select({
     </StyledSelect>
   );
 }
+
+export default forwardRef(Select);

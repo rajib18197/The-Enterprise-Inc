@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
@@ -8,6 +7,7 @@ import { useCreateJob } from "./useCreateJob";
 import { useUpdateJob } from "./useUpdateJob";
 import { useJobs } from "./useJobs";
 import { transformer } from "../../utils/helpers";
+import { useForm } from "react-hook-form";
 
 const statusOptions = [
   { value: "active", label: "Active" },
@@ -16,54 +16,47 @@ const statusOptions = [
 
 export default function CreateJobForm({ jobToUpdate = {}, onCloseModal }) {
   const isUpdateSession = Boolean(jobToUpdate?.id);
-  console.log(isUpdateSession);
-  console.log(jobToUpdate);
+  // console.log(jobToUpdate);
   const { jobs } = useJobs();
-  console.log(jobs);
+  // console.log(jobs);
 
-  const [title, setTitle] = useState(jobToUpdate?.title || "");
-  const [type, setType] = useState(jobToUpdate?.type || "");
-  const [salary, setSalary] = useState(jobToUpdate?.salary || "");
-  const [experience, setExperience] = useState(jobToUpdate?.experience || "");
-  const [benefit, setBenefit] = useState(jobToUpdate?.benefit || "");
-  const [status, setStatus] = useState(jobToUpdate?.status || "");
-  const [startDate, setStartDate] = useState(
-    jobToUpdate?.startDate?.slice(0, jobToUpdate.startDate.indexOf("T")) || ""
-  );
-  const [endDate, setEndDate] = useState(
-    jobToUpdate?.endDate?.slice(0, jobToUpdate.startDate.indexOf("T")) || ""
-  );
+  const { register, handleSubmit, reset, formState, getValues } = useForm({
+    defaultValues: isUpdateSession
+      ? {
+          ...jobToUpdate,
+          startDate: jobToUpdate?.startDate?.slice(
+            0,
+            jobToUpdate.startDate.indexOf("T")
+          ),
+          endDate: jobToUpdate?.endDate?.slice(
+            0,
+            jobToUpdate.startDate.indexOf("T")
+          ),
+        }
+      : {},
+  });
+
+  const { errors } = formState;
 
   const typeOptions = transformer(jobs, "type");
   const experienceOptions = transformer(jobs, "experience");
   const benfitsOptions = transformer(jobs, "benefit");
 
-  console.log(typeOptions);
-  console.log(experienceOptions);
-  console.log(benfitsOptions);
+  // console.log(typeOptions);
+  // console.log(experienceOptions);
+  // console.log(benfitsOptions);
 
   const { isCreating, createJob, isError } = useCreateJob();
   const { updateJob, isUpdating } = useUpdateJob();
-  console.log(isCreating, isUpdating, isUpdateSession);
 
-  console.log(title, type, salary, experience, benefit, startDate, endDate);
+  // console.log(isCreating, isUpdating, isUpdateSession);
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function onSubmit(data) {
     if (isUpdateSession) {
       updateJob(
         {
           id: jobToUpdate.id,
-          data: {
-            title,
-            type,
-            salary,
-            experience,
-            benefit,
-            status,
-            startDate,
-            endDate,
-          },
+          data,
         },
         {
           onSuccess: () => {
@@ -74,75 +67,89 @@ export default function CreateJobForm({ jobToUpdate = {}, onCloseModal }) {
       return;
     }
 
-    createJob(
-      { title, type, salary, experience, benefit, status, startDate, endDate },
-      {
-        onSettled: () => {
-          onCloseModal();
-        },
-      }
-    );
+    createJob(data, {
+      onSettled: () => {
+        onCloseModal();
+      },
+    });
   }
 
   return (
-    <Form onSubmit={handleSubmit} type={onCloseModal ? "modal" : "regular"}>
-      <FormRow label={"Job Title"}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      type={onCloseModal ? "modal" : "regular"}
+      scrolling="true"
+    >
+      <FormRow label={"Job Title"} error={errors?.title?.message}>
         <Input
           type="text"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          name="title"
+          {...register("title", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
-      <FormRow label={"Job Type"}>
+      <FormRow label={"Job Type"} error={errors?.type?.message}>
         <Select
           options={typeOptions}
-          value={type}
-          onChange={(e) => setType(e.target.value)}
+          {...register("type", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
-      <FormRow label={"Salary"}>
+      <FormRow label={"Salary"} error={errors?.salary?.message}>
         <Input
           type="number"
-          value={salary}
-          onChange={(e) => setSalary(Number(e.target.value))}
+          {...register("salary", {
+            required: "This Field is required",
+            min: {
+              value: 1,
+              message: "Salary should be at least 1",
+            },
+          })}
         />
       </FormRow>
-      <FormRow label={"Experience"}>
+      <FormRow label={"Experience"} error={errors?.experience?.message}>
         <Select
           options={experienceOptions}
-          value={experience}
-          onChange={(e) => setExperience(e.target.value)}
+          {...register("experience", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
-      <FormRow label={"Benefit"}>
+      <FormRow label={"Benefit"} error={errors?.benefit?.message}>
         <Select
           options={benfitsOptions}
-          value={benefit}
-          onChange={(e) => setBenefit(e.target.value)}
+          {...register("benefit", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label={"Status"}>
+      <FormRow label={"Status"} error={errors?.status?.message}>
         <Select
           options={statusOptions}
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
+          {...register("status", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Start Date">
+      <FormRow label="Start Date" error={errors?.startDate?.message}>
         <Input
           type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          {...register("startDate", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="End Date">
+      <FormRow label="End Date" error={errors?.endDate?.message}>
         <Input
           type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          {...register("endDate", {
+            required: "This Field is required",
+          })}
         />
       </FormRow>
 

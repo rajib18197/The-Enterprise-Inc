@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateUserData } from "../../services/apiAuth";
 import { supabase } from "../../services/supabase";
+import toast from "react-hot-toast";
 
 export function useUpdateUserData() {
   const queryClient = useQueryClient();
@@ -13,10 +14,13 @@ export function useUpdateUserData() {
     mutationFn: updateUserData,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
+
+      toast.success("Account has been updated successfully");
     },
 
     onError(err) {
       console.error(err);
+      toast.error("Account could not be updated successfully");
     },
   });
 

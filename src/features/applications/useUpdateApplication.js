@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createApplication } from "../../services/apiApplications";
+import toast from "react-hot-toast";
 
 export function useUpdateApplication() {
   const queryClient = useQueryClient();
 
   const {
     mutate: updateApplication,
-    isLoading: isUpdating,
+    isPending: isUpdating,
     isError,
   } = useMutation({
     mutationFn: ({ id, newData }) => {
@@ -14,8 +15,15 @@ export function useUpdateApplication() {
       return createApplication(newData, id);
     },
 
-    onSuccess() {
-      queryClient.invalidateQueries({ queryKey: ["applications"] });
+    onSuccess: (data) => {
+      console.log(data);
+      queryClient.invalidateQueries({ queryKey: "applications" });
+      toast.success("Application has been updated successfully");
+    },
+
+    onError(err) {
+      console.log(err);
+      toast.error("Application could not be updated. Try again!");
     },
   });
 

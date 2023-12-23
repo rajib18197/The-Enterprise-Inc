@@ -10,6 +10,7 @@ import Checkbox from "../../ui/Checkbox";
 import { useUpdateApplication } from "./useUpdateApplication";
 import { SUPABASE_URL } from "../../services/supabase";
 import Input from "../../ui/Input";
+import { useForm } from "react-hook-form";
 
 const transformer = function (obj, name, email) {
   // const str = `${obj[name].toLowerCase().split(' ').join('-')}-${obj[email].toLowerCase()}`
@@ -34,59 +35,40 @@ export default function CreateApplicationForm({
   onCloseModal,
 }) {
   const isUpdateSession = Boolean(applicationToUpdate?.id);
-  console.log(isUpdateSession);
   console.log(applicationToUpdate);
 
   const { jobs, isLoading, error: jobError } = useJobs();
   const { candidates, isLoading: isCandidatesLoading, error } = useCandidates();
-  // console.log(jobs);
-  // console.log(candidates);
 
   const { createApplication, isCreating } = useCreateApplication();
   const { updateApplication, isUpdating } = useUpdateApplication();
-  // console.log(applicationToUpdate?.jobs.id);
-  // console.log(applicationToUpdate?.candidates.id);
 
-  const [jobTitle, setJobTitle] = useState(applicationToUpdate?.jobs?.id || "");
-  const [candidate, setCandidate] = useState(
-    applicationToUpdate?.candidates?.id || ""
-  );
-  const [status, setStatus] = useState(() => {
-    if (isUpdateSession) {
-      const findStatus = statusOptions.find(
-        (opt) => opt.value === applicationToUpdate.status
-      );
-      console.log(findStatus);
-      return findStatus.value;
-    }
-    return "";
+  const { register, handleSubmit, reset, formState, getValues } = useForm({
+    defaultValues: isUpdateSession
+      ? {
+          ...applicationToUpdate,
+          jobTitle: applicationToUpdate?.jobs?.id,
+          candidate: applicationToUpdate?.candidates?.id,
+          status: statusOptions.find(
+            (opt) => opt.value === applicationToUpdate.status
+          ).value,
+          submittedDate: applicationToUpdate?.submittedDate?.slice(
+            0,
+            applicationToUpdate.submittedDate.indexOf("T")
+          ),
+          specialMention: applicationToUpdate?.specialAttribute,
+          resume: applicationToUpdate?.resume,
+          experience: experiences.find(
+            (exp) => exp.value === applicationToUpdate.experience
+          ).value,
+          hasEdTechExperience: applicationToUpdate.hasEdTechExperience,
+          salaryExpectation: applicationToUpdate.salaryExpectation,
+        }
+      : {},
   });
-  const [submittedDate, setSubmittedDate] = useState(
-    applicationToUpdate?.submittedDate?.slice(
-      0,
-      applicationToUpdate.submittedDate.indexOf("T")
-    ) || ""
-  );
-  const [specialMention, setSpecialMention] = useState(
-    applicationToUpdate?.specialAttribute || ""
-  );
-  const [resume, setResume] = useState(applicationToUpdate?.resume && "");
-  const [experience, setExperience] = useState(() => {
-    if (isUpdateSession) {
-      const findExperience = experiences.find(
-        (exp) => exp.value === applicationToUpdate.experience
-      );
-      return findExperience.value;
-    }
 
-    return "";
-  });
-  const [hasEdTechExperience, setHasEdTechExperience] = useState(
-    applicationToUpdate?.hasEdTechExperience || false
-  );
-  const [salaryExpectation, setSalaryExpectation] = useState(
-    applicationToUpdate?.salaryExpectation || ""
-  );
+  const { errors } = formState;
+  console.log(formState);
 
   if (isLoading || isCandidatesLoading) return <h2>Loading</h2>;
 
@@ -95,136 +77,162 @@ export default function CreateApplicationForm({
     label: job.title,
   }));
 
-  console.log(submittedDate);
-
   const candidateOptions = candidates.map((candidate) => ({
     value: candidate.id,
     label: `${candidate.fullName}-${candidate.email}`,
   }));
 
-  function submitHandler(e) {
-    e.preventDefault();
-    console.log(experience, status, specialMention, resume, candidate);
+  function onSubmit(data) {
+    console.log(data, applicationToUpdate.submittedDate);
 
     if (isUpdateSession) {
       console.log(isUpdateSession);
-      updateApplication({
-        id: applicationToUpdate.id,
-        newData: {
-          jobId: Number(jobTitle),
-          candidateId: Number(candidate),
-          submittedDate,
-          resume: resume === "" ? applicationToUpdate.resume : resume,
-          experience,
-          status,
-          specialAttribute: specialMention.split(" ").join("-"),
-          hasExtraRound: applicationToUpdate.hasExtraRound,
-          salaryExpectation,
-          hasEdTechExperience,
+      updateApplication(
+        {
+          id: applicationToUpdate.id,
+          newData: {
+            jobId: Number(data.jobTitle),
+            candidateId: Number(data.candidate),
+            submittedDate: data?.submittedDate + "T00:00:00",
+            resume: data.resume,
+            experience: data.experience,
+            status: data.status,
+            specialAttribute: data.specialMention.split(" ").join("-"),
+            hasExtraRound: applicationToUpdate.hasExtraRound,
+            salaryExpectation: data.salaryExpectation,
+            hasEdTechExperience: applicationToUpdate.hasEdTechExperience,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            onCloseModal();
+            reset();
+          },
+        }
+      );
 
       return;
     }
 
-    createApplication({
-      jobId: Number(jobTitle),
-      candidateId: Number(candidate),
-      // startDate,
-      // endDate,
-      submittedDate,
-      resume,
-      status,
-      experience,
-      specialAttribute: specialMention.split(" ").join("-"),
-      hasExtraRound: false,
-      observations: "text",
-      salaryExpectation,
-      hasEdTechExperience,
-    });
+    createApplication(
+      {
+        jobId: Number(data.jobTitle),
+        candidateId: Number(data.candidate),
+        submittedDate: data?.submittedDate + "T00:00:00",
+        resume: data.resume[0],
+        experience: data.experience,
+        status: data.status,
+        specialAttribute: data.specialMention.split(" ").join("-"),
+        hasExtraRound: false,
+        observations: "text",
+        salaryExpectation: data.salaryExpectation,
+        hasEdTechExperience: true, // TODO:
+      },
+      {
+        onSuccess: () => {
+          reset();
+          onCloseModal();
+        },
+      }
+    );
   }
 
   return (
     <Form
+      onSubmit={handleSubmit(onSubmit)}
       type={onCloseModal ? "modal" : "regular"}
       scrolling="true"
-      onSubmit={submitHandler}
     >
-      <FormRow label="Job" error={""}>
+      <FormRow label="Job" error={errors?.jobTitle?.message}>
         <Select
           options={titleOptions}
-          value={jobTitle}
+          {...register("jobTitle", {
+            required: "This field is required",
+          })}
           label={"JobTitle"}
-          onChange={(e) => setJobTitle(e.target.value)}
         />
       </FormRow>
 
-      <FormRow label="Candidate">
+      <FormRow label="Candidate" error={errors?.candidate?.message}>
         <Select
           options={candidateOptions}
-          value={candidate}
+          {...register("candidate", {
+            required: "This field is required",
+          })}
           label={"Candidate"}
-          onChange={(e) => setCandidate(e.target.value)}
         />
       </FormRow>
 
-      <FormRow label="Submission Date">
+      <FormRow label="Submission Date" error={errors?.submittedDate?.message}>
         <Input
           type="date"
-          value={submittedDate}
-          onChange={(e) => setSubmittedDate(e.target.value)}
+          {...register("submittedDate", {
+            required: "This field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Status">
+      <FormRow label="Status" error={errors?.status?.message}>
         <Select
           options={statusOptions}
-          value={status}
-          label={"Status"}
-          onChange={(e) => setStatus(e.target.value)}
+          {...register("status", {
+            required: "This field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Special Mention">
+      <FormRow label="Special Mention" error={errors?.specialMention?.message}>
         <Input
           type="text"
-          value={specialMention}
-          onChange={(e) => setSpecialMention(e.target.value)}
+          {...register("specialMention", {
+            required: "This field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Resume">
+      <FormRow label="Resume" error={errors?.resume?.message}>
         <FileInput
           accept="application/pdf"
-          // value={resume}
-          onChange={(e) => setResume(e.target.files[0])}
+          {...register("resume", {
+            required: isUpdateSession ? false : "This field is required",
+          })}
         />
       </FormRow>
 
-      <FormRow label="Experience">
+      <FormRow label="Experience" error={errors?.experience?.message}>
         <Select
           options={experiences}
-          onChange={(e) => setExperience(e.target.value)}
-          value={experience}
+          {...register("experience", {
+            required: "This field is required",
+          })}
           label={"Experience"}
         />
       </FormRow>
 
-      <FormRow label="Ed-Tech Experience">
+      {/* <FormRow label="Ed-Tech Experience">
         <Checkbox
           id="edtech"
-          checked={hasEdTechExperience}
-          onChange={() => setHasEdTechExperience((edTech) => !edTech)}
+          ref={register("hasEdTechExperience", {
+            required: "This field is required",
+          })}
         >
           Ed-Tech Experience
         </Checkbox>
-      </FormRow>
+      </FormRow> */}
 
-      <FormRow label="salary expectation">
+      <FormRow
+        label="salary expectation"
+        error={errors?.salaryExpectation?.message}
+      >
         <Input
           type="number"
-          value={salaryExpectation}
-          onChange={(e) => setSalaryExpectation(Number(e.target.value))}
+          {...register("salaryExpectation", {
+            required: "This field is required",
+            min: {
+              value: 1,
+              message: "value should be at lease 1",
+            },
+          })}
         />
       </FormRow>
 
@@ -236,7 +244,18 @@ export default function CreateApplicationForm({
         >
           Cancel
         </Button>
-        <Button>Add</Button>
+        <Button>
+          {isCreating && !isUpdating && !isUpdateSession && "Creating"}
+          {isUpdating && !isCreating && isUpdateSession && "Updating"}
+          {!isCreating &&
+            !isUpdating &&
+            !isUpdateSession &&
+            "Create New Application"}
+          {!isCreating &&
+            !isUpdating &&
+            isUpdateSession &&
+            "Update Application"}
+        </Button>
       </FormRow>
     </Form>
   );

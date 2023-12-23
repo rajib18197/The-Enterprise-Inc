@@ -11,15 +11,14 @@ const LoginLayout = styled.main`
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
-  /* background-color: var(--color-grey-50); */
 `;
 
 export default function Login() {
   return (
     <LoginLayout>
-      <Heading as="h5">Your One Place</Heading>
-      <Heading as="h4">Log in to your account</Heading>
-      <LoginForm />
+      {/* <Heading as="h5">Your One Place</Heading> */}
+      <Heading as="h5">Log in to your account</Heading>
+      <LoginForm type="login" />
     </LoginLayout>
   );
 }

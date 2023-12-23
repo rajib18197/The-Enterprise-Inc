@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getHomes } from "../../services/apiHomes";
 import { getApplications } from "../../services/apiApplications";
 import { useSearchParams } from "react-router-dom";
@@ -17,6 +17,8 @@ export function useHomes() {
 }
 
 export function useApplications({ flag = true } = {}) {
+  const queryClient = useQueryClient();
+
   const [searchParams] = useSearchParams();
   console.log(searchParams);
   const filterValues = [];
@@ -105,7 +107,24 @@ export function useApplications({ flag = true } = {}) {
     retry: false,
   });
 
-  console.log(error);
+  console.log(count);
+  const pageCount = Math.ceil(count / 5);
+  console.log(pageCount);
+
+  if (currentPage < pageCount) {
+    console.log(111);
+    queryClient.prefetchQuery({
+      queryKey: ["applications", filters, currentPage + 1],
+      queryFn: () => getApplications({ filters, currentPage: currentPage + 1 }),
+    });
+  }
+
+  if (currentPage > 1) {
+    queryClient.prefetchQuery({
+      queryKey: ["applications", filters, currentPage - 1],
+      queryFn: () => getApplications({ filters, currentPage: currentPage - 1 }),
+    });
+  }
   return { isPending, applications, isError, count };
 }
 

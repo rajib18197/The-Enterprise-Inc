@@ -49,10 +49,19 @@ const Heading = styled.h1`
     ${(props) =>
     props.as === "h5" &&
     css`
-      font-size: 2rem;
+      font-size: 4rem;
       font-weight: 500;
       font-family: "Josefin Sans", sans-serif;
-      /* color: #e11d48; */
+      color: #e7dcdf;
+      /* border-top: 2px solid white;
+      padding: 1rem;
+      border-bottom: 2px solid white; */
+      text-align: center;
+      width: 45rem;
+      text-transform: capitalize;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     `}
     
   line-height: 1.4;

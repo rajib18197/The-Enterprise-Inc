@@ -1,28 +1,77 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-// import Users from "./pages/Users";
-// import Homes from "./pages/Homes";
-// import Bookings from "./pages/Bookings";
-// import Booking from "./pages/Booking";
-// import Dashboard from "./pages/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GlobalStyles from "./styles/GlobalStyles";
-import AppLayout from "./ui/AppLayout";
-import Jobs from "./pages/Jobs";
-import Applications from "./pages/Applications";
-import Application from "./pages/Application";
 import ThemeProvider from "./context/ThemeContext";
-import SelectedCandidate from "./features/selected-rejected/SelectedCandidate";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./ui/ProtectedRoute";
-import Users from "./pages/Users";
-import Account from "./pages/Account";
-import Settings from "./pages/Settings";
-import TableSort from "./ui/TableSort";
-import ReusableInput from "./ui/ReusableInput";
-import Paginations from "./ui/Paginations";
-import FolderExplorer from "./ui/FolderExplorer";
 
+// import AppLayout from "./ui/AppLayout";
+// import Jobs from "./pages/Jobs";
+// import Applications from "./pages/Applications";
+// import Application from "./pages/Application";
+// import SelectedCandidate from "./features/selected-rejected/SelectedCandidate";
+// import Login from "./pages/Login";
+// import Dashboard from "./pages/Dashboard";
+// import Users from "./pages/Users";
+// import Account from "./pages/Account";
+// import Settings from "./pages/Settings";
+
+import FolderExplorer from "./ui/FolderExplorer";
+import { Suspense, lazy } from "react";
+import Spinner from "./ui/Spinner";
+import { Toaster } from "react-hot-toast";
+
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const AppLayout = lazy(() => import("./ui/AppLayout"));
+const Jobs = lazy(() => import("./pages/Jobs"));
+const Applications = lazy(() => import("./pages/Applications"));
+const Application = lazy(() => import("./pages/Application"));
+const SelectedCandidate = lazy(() =>
+  import("./features/selected-rejected/SelectedCandidate")
+);
+const Login = lazy(() => import("./pages/Login"));
+const Users = lazy(() => import("./pages/Users"));
+const Account = lazy(() => import("./pages/Account"));
+const Settings = lazy(() => import("./pages/Settings"));
+
+// dist/index.html                   1.08 kB │ gzip:   0.48 kB
+// dist/assets/index-6d3c405e.css    5.17 kB │ gzip:   1.65 kB
+// dist/assets/index-ba90fc1d.js   735.63 kB │ gzip: 215.58 kB
+
+// dist/index.html                              1.08 kB │ gzip:   0.48 kB
+// dist/assets/Applications-c48ed37a.css        0.65 kB │ gzip:   0.31 kB
+// dist/assets/index-8da85d73.css               2.15 kB │ gzip:   0.90 kB
+// dist/assets/Select-e0e2a3a5.css              2.37 kB │ gzip:   0.77 kB
+// dist/assets/Section-3ebee09a.js              0.32 kB │ gzip:   0.23 kB
+// dist/assets/Row-702a564e.js                  0.33 kB │ gzip:   0.24 kB
+// dist/assets/SpinnerMini-eb7275d1.js          0.48 kB │ gzip:   0.35 kB
+// dist/assets/useSetting-09a51d2f.js           0.57 kB │ gzip:   0.30 kB
+// dist/assets/FileInput-874db28f.js            0.58 kB │ gzip:   0.31 kB
+// dist/assets/Logo-a0530238.js                 0.62 kB │ gzip:   0.39 kB
+// dist/assets/ContainerBox-9fd9dde4.js         0.76 kB │ gzip:   0.42 kB
+// dist/assets/Checkbox-5ef9f8ec.js             0.77 kB │ gzip:   0.43 kB
+// dist/assets/helpers-1b928822.js              0.80 kB │ gzip:   0.48 kB
+// dist/assets/Heading-0ca8c87e.js              0.91 kB │ gzip:   0.33 kB
+// dist/assets/Button-5efc8ded.js               1.15 kB │ gzip:   0.45 kB
+// dist/assets/iconBase-f2d233ff.js             1.51 kB │ gzip:   0.74 kB
+// dist/assets/Settings-09cbe823.js             1.64 kB │ gzip:   0.72 kB
+// dist/assets/Users-cce40113.js                1.65 kB │ gzip:   0.74 kB
+// dist/assets/Login-8b861425.js                1.70 kB │ gzip:   0.89 kB
+// dist/assets/Modal-2bfc0b42.js                1.78 kB │ gzip:   0.81 kB
+// dist/assets/FormRow-ae4aca6b.js              2.08 kB │ gzip:   0.90 kB
+// dist/assets/ObservationBox-5e50d21b.js       2.17 kB │ gzip:   0.93 kB
+// dist/assets/apiApplications-6cee9659.js      2.37 kB │ gzip:   0.97 kB
+// dist/assets/useMutation-eb950c9e.js          2.84 kB │ gzip:   1.16 kB
+// dist/assets/Account-b9fb1bce.js              2.99 kB │ gzip:   1.21 kB
+// dist/assets/Application-ba29cf30.js          5.48 kB │ gzip:   2.04 kB
+// dist/assets/Select-73a8be60.js               7.58 kB │ gzip:   2.35 kB
+// dist/assets/SelectedCandidate-6d1a2f37.js    7.98 kB │ gzip:   3.35 kB
+// dist/assets/AppLayout-062172ae.js            9.59 kB │ gzip:   2.62 kB
+// dist/assets/Jobs-765fa010.js                11.28 kB │ gzip:   3.82 kB
+// dist/assets/index.esm-30ca59c5.js           13.78 kB │ gzip:   3.71 kB
+// dist/assets/Applications-c85ef3e1.js        17.30 kB │ gzip:   5.27 kB
+// dist/assets/SearchBox-4c5c5d56.js           26.83 kB │ gzip:  10.20 kB
+// dist/assets/index-7bcc7a5a.js              239.01 kB │ gzip:  77.76 kB
+// dist/assets/Dashboard-a6831d32.js          376.56 kB │ gzip: 104.88 kB
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -37,215 +86,54 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
         <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate replace to="dashboard" />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="selected/:id" element={<SelectedCandidate />} />
-              <Route path="applications" element={<Applications />} />
-              <Route path="applications/:id" element={<Application />} />
-              <Route path="jobs" element={<Jobs />} />
-              <Route path="users" element={<Users />} />
-              <Route path="account" element={<Account />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="folders" element={<FolderExplorer />} />
-            </Route>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="dashboard" />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="selected/:id" element={<SelectedCandidate />} />
+                <Route path="applications" element={<Applications />} />
+                <Route path="applications/:id" element={<Application />} />
+                <Route path="jobs" element={<Jobs />} />
+                <Route path="users" element={<Users />} />
+                <Route path="account" element={<Account />} />
+                <Route path="settings" element={<Settings />} />
+                {/* <Route path="folders" element={<FolderExplorer />} /> */}
+              </Route>
 
-            <Route path="login" element={<Login />} />
-          </Routes>
+              <Route path="login" element={<Login />} />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
+
+        <Toaster
+          position="top-right"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 4000,
+            },
+
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-grey-0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
       </QueryClientProvider>
     </ThemeProvider>
   );
 }
-
-// The previous files code are able to found in [JS-PRACTICE-HOME] folder
-{
-  /* Test */
-}
-{
-  /* <Route
-                path="resuabletable"
-                element={
-                  <>
-                    <TableSort />
-                    <ReusableInput />
-                    <Paginations />
-                  </>
-                }
-              />
-            </Route> */
-}
-
-// import { useState } from "react";
-
-// const makeRating = function (number) {
-//   return Array.from({ length: number }, (_, i) => ({
-//     half: i + 1 - 0.5,
-//     full: i + 1,
-//   }));
-// };
-
-// export default function StarRating({
-//   initialRating = 0,
-//   onSetRate,
-//   maxRatingNumber,
-// }) {
-//   const rates = makeRating(maxRatingNumber);
-
-//   console.log(rates);
-//   const [rating, setRating] = useState(initialRating);
-//   const [tempRating, setTempRating] = useState(0);
-
-//   return (
-//     <StarContainer>
-//       <StarList
-//         rates={rates}
-//         rating={rating}
-//         onRating={setRating}
-//         tempRating={tempRating}
-//         onTempRating={setTempRating}
-//         onSetRateOutside={onSetRate}
-//       />
-//       <Text>{tempRating || rating || ""}</Text>
-//     </StarContainer>
-//   );
-// }
-
-// const starContainerStyle = {
-//   width: "100%",
-//   height: "6rem",
-//   background: "var(--color-grey-800)",
-//   color: "white",
-//   borderRadius: "3px",
-//   display: "flex",
-//   gap: "1rem",
-//   alignItems: "center",
-//   padding: "3rem",
-//   //   justifyContent: "center",
-// };
-
-// function StarContainer({ children }) {
-//   return <div style={starContainerStyle}>{children}</div>;
-// }
-
-// const starListStyle = {
-//   display: "flex",
-//   alignItems: "center",
-//   gap: ".6rem",
-//   width: "80%",
-// };
-
-// function StarList({
-//   rates,
-//   rating,
-//   onRating,
-//   tempRating,
-//   onTempRating,
-//   onSetRateOutside,
-// }) {
-//   return (
-//     <div style={starListStyle}>
-//       {rates.map((rate) => (
-//         <Star
-//           key={rate.half}
-//           rate={rate}
-//           rating={rating}
-//           onRating={(r) => onRating(r)}
-//           onSetRateOutside={onSetRateOutside}
-//           tempRating={tempRating}
-//           onTempRating={(r) => onTempRating(r)}
-//           isFull={tempRating ? tempRating >= rate.full : rating >= rate.full}
-//         />
-//       ))}
-//     </div>
-//   );
-// }
-
-// const starStyle = {
-//   display: "block",
-//   cursor: "pointer",
-// };
-
-// const iconStyle = {
-//   width: "3.2rem",
-//   height: "3.2rem",
-//   color: "var(--color-brand-600)",
-// };
-
-// function Star({
-//   rate,
-//   rating,
-//   onRating,
-//   tempRating,
-//   onTempRating,
-//   isFull,
-//   onSetRateOutside,
-// }) {
-//   const isHalf = tempRating === rate.half || rating === rate.half;
-
-//   function handleRate(e) {
-//     const coords = e.target.getBoundingClientRect();
-//     const leftCoords = coords.x;
-//     const clickedCoords = e.clientX;
-//     console.log(clickedCoords - leftCoords, coords);
-
-//     if (clickedCoords - leftCoords < Math.floor(coords.width / 2)) {
-//       onRating(rate.half);
-//       onSetRateOutside(rate.half);
-//       return;
-//     }
-
-//     onRating(rate.full);
-//     onSetRateOutside(rate.full);
-//   }
-
-//   function handleEnter(e) {
-//     const coords = e.target.getBoundingClientRect();
-//     const leftCoords = coords.x;
-//     const clickedCoords = e.clientX;
-
-//     if (clickedCoords - leftCoords <= Math.floor(coords.width / 2)) {
-//       onTempRating(rate.half);
-//       return;
-//     }
-
-//     onTempRating(rate.full);
-//   }
-
-//   return (
-//     <span
-//       role="button"
-//       style={starStyle}
-//       onClick={handleRate}
-//       onMouseMove={handleEnter}
-//       onMouseOut={() => onTempRating(0)}
-//     >
-//       {!isFull && !isHalf && (
-//         <ion-icon name="star-outline" style={iconStyle}></ion-icon>
-//       )}
-
-//       {isFull && <ion-icon name="star" style={iconStyle}></ion-icon>}
-
-//       {isHalf && (
-//         <ion-icon name="star-half-outline" style={iconStyle}></ion-icon>
-//       )}
-//     </span>
-//   );
-// }
-
-// const textStyle = {
-//   fontSize: "1.6rem",
-//   fontWeight: "600",
-//   textTransform: "uppercase",
-// };
-
-// function Text({ children }) {
-//   return <p style={textStyle}>{children}</p>;
-// }

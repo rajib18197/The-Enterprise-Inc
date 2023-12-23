@@ -27,13 +27,6 @@ const Form = styled.form`
 
       /* Box */
       background-color: var(--color-grey-0);
-      /* background-image: linear-gradient(
-        260deg,
-        #da96fc 0%,
-        #7344ff 50%,
-        #da96fc 80%
-      ); */
-      /* border: 1px solid var(--color-grey-100); */
       border-radius: var(--border-radius-md);
 
       @media (max-width: 60em) {
@@ -49,6 +42,13 @@ const Form = styled.form`
     props.type === "modal" &&
     css`
       width: 100rem;
+    `}
+
+    ${(props) =>
+    props.type === "login" &&
+    css`
+      width: 60rem;
+      border: 30px solid #8b15c2;
     `}
     
   // overflow: hidden;

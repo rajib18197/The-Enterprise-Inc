@@ -15,6 +15,7 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+  margin-bottom: 10rem;
 
   @media (max-width: 44em) {
     width: 100rem;
