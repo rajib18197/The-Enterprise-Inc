@@ -61,7 +61,7 @@ const Button = styled.button`
   border-radius: var(--border-radius-sm);
   font-weight: 500;
   font-size: 1.4rem;
-  /* To give the same height as select */
+
   padding: 1rem 2.5rem;
   transition: all 0.3s;
 `;
