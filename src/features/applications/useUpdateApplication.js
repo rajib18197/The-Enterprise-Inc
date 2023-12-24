@@ -17,7 +17,7 @@ export function useUpdateApplication() {
 
     onSuccess: (data) => {
       console.log(data);
-      queryClient.invalidateQueries({ queryKey: "applications" });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
       toast.success("Application has been updated successfully");
     },
 

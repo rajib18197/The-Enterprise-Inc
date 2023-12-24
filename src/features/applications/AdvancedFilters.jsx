@@ -95,7 +95,7 @@ export default function AdvancedFilters() {
   ];
 
   const optionsEssentials = [
-    { value: "edTechExperience", label: "Ed-Tech Experience" },
+    // { value: "edTechExperience", label: "Ed-Tech Experience" },
     { value: "extra-round", label: "Extra Round" },
   ];
 

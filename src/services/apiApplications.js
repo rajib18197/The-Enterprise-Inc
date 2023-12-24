@@ -20,7 +20,10 @@ export async function getApplications({ filters, currentPage }) {
       } else if (filter?.table === "foreign") {
         query = query
           .select("*, jobs!inner(*), candidates(*)", { count: "exact" })
-          [filter.method](`jobs.${filter.field}`, filter.value);
+          [
+            // .select("*, jobs(*), candidates(*)", { count: "exact" })
+            filter.method
+          ](`jobs.${filter.field}`, filter.value);
       } else {
         query = query
           .select("*, jobs(*), candidates(*)", { count: "exact" })

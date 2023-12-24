@@ -19,6 +19,8 @@ export default function ApplicationList() {
       <Error msg="There is an error occurred while fetching candidates applications. Please try again :)" />
     );
 
+  console.log(applications);
+
   return (
     <Menus>
       <TableContainer>
@@ -45,17 +47,3 @@ export default function ApplicationList() {
     </Menus>
   );
 }
-
-// Features don’t make money! Products make money!
-
-// So, it is time you market yourself not as a developer but as a money-making specialist.
-
-// Where is the best place to do that?
-
-// In your CV & LinkedIn profile.
-
-// How?
-
-// By directly relating the stuff you do with the revenue. Either by generating more sales (better website, better conversion, more money) or by reducing cost (automating processes that were in the past done by humans, expensive humans).
-
-// That’s it

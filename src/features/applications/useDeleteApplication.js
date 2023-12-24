@@ -8,6 +8,15 @@ export function useDeleteApplication() {
     isError,
   } = useMutation({
     mutationFn: deleteApplicationApi,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
+      toast.success("Application has been deleted successfully");
+    },
+
+    onError(err) {
+      console.log(err);
+      toast.error("Application could not be deleted. Try again!");
+    },
   });
 
   return { deleteApplication, isDeleting, isError };

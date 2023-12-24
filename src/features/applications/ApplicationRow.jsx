@@ -89,6 +89,7 @@ const PDFView = styled.embed`
 `;
 
 export default function ApplicationRow({ application }) {
+  console.log(application);
   const {
     id: applicationId,
     submittedDate,
@@ -96,7 +97,7 @@ export default function ApplicationRow({ application }) {
     specialAttribute,
     resume,
     candidates: { fullName, email },
-    jobs: { title: jobTitle, startDate, endDate },
+    jobs: { title: jobTitle = "", startDate, endDate } = {},
   } = application;
 
   console.log(applicationId);

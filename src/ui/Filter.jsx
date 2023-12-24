@@ -39,6 +39,8 @@ export default function Filter({ filterFields, options }) {
   const currentFilter = searchParams.get(filterFields) || options.at(0).value;
 
   function handleClick(value) {
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     searchParams.set(filterFields, value);
     setSearchParams(searchParams);
   }
@@ -112,6 +114,8 @@ export function FilterCombined({ filterFields, options }) {
     searchParams.get(filterFields) || options.at(0).value;
 
   function handleClick({ field, range }) {
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     // If value is all then we remove the url string of this filter
     if (!field && !range) {
       searchParams.delete(filterFields);
@@ -187,6 +191,8 @@ export function FilterRound({ filterFields, options }) {
   console.log(currentFilter1, currentFilter2);
 
   function handleClick({ experience, salaryExpectationRange }) {
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     const [first, second] = filterFields.split("-");
     searchParams.set(first, experience);
     const arr = Object.values(salaryExpectationRange);
@@ -272,6 +278,8 @@ export function FilterBox({ filterFields, options }) {
   console.log(currentFilters);
 
   function handleClick(value) {
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     const existingValues = searchParams.get(filterFields);
     console.log(existingValues);
 
@@ -361,7 +369,8 @@ export function FilterCheck({ filterFields, options }) {
   }
 
   function handleClick(value) {
-    console.log("called");
+    if (searchParams.get("page")) searchParams.set("page", 1);
+
     const existingValues = searchParams.get(filterFields); // NOT an array
     console.log(existingValues);
     const arr = existingValues?.split(",");

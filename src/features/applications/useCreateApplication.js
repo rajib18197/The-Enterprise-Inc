@@ -13,7 +13,7 @@ export function useCreateApplication() {
     mutationFn: createApplicationApi,
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: "applications" });
+      queryClient.invalidateQueries({ queryKey: ["applications"] });
       toast.success("Application has been created successfully");
     },
 
