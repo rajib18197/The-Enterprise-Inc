@@ -214,7 +214,7 @@ export default function StatisticsChart({ jobs, applications }) {
           <XAxis dataKey="statName" />
           <YAxis unit="#" />
           <Tooltip />
-          <Bar dataKey="value" fill="#e02bf8" />
+          <Bar dataKey="value" fill="#FF5722" />
         </BarChart>
       </ResponsiveContainer>
     </ChartBox>

@@ -52,7 +52,7 @@ const Heading = styled.h1`
       font-size: 4rem;
       font-weight: 500;
       font-family: "Josefin Sans", sans-serif;
-      color: #e7dcdf;
+      color: #352e30;
       /* border-top: 2px solid white;
       padding: 1rem;
       border-bottom: 2px solid white; */

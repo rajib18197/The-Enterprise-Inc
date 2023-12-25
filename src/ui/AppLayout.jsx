@@ -20,12 +20,13 @@ const Main = styled.main`
   padding: 4rem 2.8rem 3.4rem;
   grid-column: 2 / -1;
   grid-row: 2 / -1;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   box-shadow: var(--shadow-xl);
   border-radius: var(--border-radius-lm);
 
-  height: calc(100vh - 11vh - 3rem);
   /* height: 100%; */
+  height: calc(100vh - 11vh - 3rem);
+  /* height: calc(100vh - 11vh - 3rem);
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -38,7 +39,7 @@ const Main = styled.main`
   &::-webkit-scrollbar-thumb {
     background-color: var(--color-silver-700);
     border-radius: 4px;
-  }
+  } */
 
   @media (max-width: 60em) {
     grid-row: 3 / span 1;
