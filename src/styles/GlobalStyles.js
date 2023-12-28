@@ -134,17 +134,11 @@ body {
   padding: 1rem;
 
   transition: color 0.3s, background-color 0.3s;
-  /* background-image: linear-gradient(to right bottom, #FF3366, #BA265D);
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; */
   background-color: #eebafe;
-  /* background-color: #f6f6f6; */
   height: 100vh;
   line-height: 1.5;
   font-size: 1.6rem;
   overflow: hidden;
-  /* background-color: #fffffe; */
 
   @media (max-width: 60em){
     /* height: auto; */
@@ -183,7 +177,7 @@ select:focus {
   outline-offset: -1px;
 }
 
-/* Parent selector, finally 😃 */
+
 button:has(svg) {
   line-height: 0;
 }

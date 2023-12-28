@@ -12,8 +12,6 @@ import Menus from "../../ui/Menus";
 import Table, { TableContainer } from "../../ui/Table";
 import ColumnMenus from "../../ui/ColumnMenus";
 import { useSearchParams } from "react-router-dom";
-import { useCallback, useRef, useState } from "react";
-import { useJobsInfinite } from "./useJobsInfinite";
 
 const HeaderColumnName = styled.span`
   font-size: 1.6rem;
@@ -23,33 +21,11 @@ const HeaderColumnName = styled.span`
 `;
 
 export default function JobTable({ searchValue = "" }) {
-  // const [page, setPage] = useState(1);
-  // console.log(searchValue);
-  const { isLoading, jobs, error } = useJobs({ searchValue });
-  // const { isLoading, jobs, error, hasNextPage } = useJobsInfinite(page);
+  const { isPending, jobs, error } = useJobs({ searchValue });
   console.log(jobs);
   const [searchParams] = useSearchParams();
 
-  // let observer = useRef();
-
-  // const lastJobRowRef = useCallback(
-  //   (jobEl) => {
-  //     if (isLoading) return;
-  //     if (observer.current) observer.current.disconnect();
-  //     if (!hasNextPage) return;
-
-  //     observer.current = new IntersectionObserver(function ([entry]) {
-  //       if (entry.isIntersecting && hasNextPage) {
-  //         setPage((cur) => cur + 1);
-  //       }
-  //     });
-
-  //     if (jobEl) observer.current.observe(jobEl);
-  //   },
-  //   [isLoading, hasNextPage]
-  // );
-
-  if (isLoading) return <Spinner />;
+  if (isPending) return <Spinner />;
 
   const filterValue = searchParams.get("status") || "all";
   let filteredJobs = jobs;

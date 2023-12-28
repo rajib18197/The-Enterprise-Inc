@@ -5,7 +5,7 @@ import { getAllCandidates } from "../../services/apiCandidates";
 export function useJobs({ searchValue = "" } = {}) {
   // console.log(searchValue);
   const {
-    isLoading,
+    isPending,
     data: jobs,
     error,
   } = useQuery({
@@ -13,7 +13,7 @@ export function useJobs({ searchValue = "" } = {}) {
     queryFn: () => getAllJobs({ searchValue }),
   });
 
-  return { isLoading, jobs, error };
+  return { isPending, jobs, error };
 }
 
 export function useCandidates() {

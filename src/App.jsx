@@ -2,24 +2,12 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GlobalStyles from "./styles/GlobalStyles";
 import ThemeProvider from "./context/ThemeContext";
-import ProtectedRoute from "./ui/ProtectedRoute";
-
-// import AppLayout from "./ui/AppLayout";
-// import Jobs from "./pages/Jobs";
-// import Applications from "./pages/Applications";
-// import Application from "./pages/Application";
-// import SelectedCandidate from "./features/selected-rejected/SelectedCandidate";
-// import Login from "./pages/Login";
-// import Dashboard from "./pages/Dashboard";
-// import Users from "./pages/Users";
-// import Account from "./pages/Account";
-// import Settings from "./pages/Settings";
-
-import FolderExplorer from "./ui/FolderExplorer";
-import { Suspense, lazy } from "react";
-import Spinner from "./ui/Spinner";
 import { Toaster } from "react-hot-toast";
 
+import { Suspense, lazy } from "react";
+import Spinner from "./ui/Spinner";
+
+import ProtectedRoute from "./ui/ProtectedRoute";
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AppLayout = lazy(() => import("./ui/AppLayout"));
 const Jobs = lazy(() => import("./pages/Jobs"));
