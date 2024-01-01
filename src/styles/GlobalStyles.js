@@ -99,7 +99,7 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-500: #6366f1;
   --color-brand-600: #FF5722; 
   --color-brand-700: #e64e1f;
-  --color-brand-800: #3730a3;
+  --color-brand-800: #993414;
   --color-brand-900: #312e81;
 }
 

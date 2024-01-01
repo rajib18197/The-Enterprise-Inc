@@ -12,6 +12,7 @@ import Menus from "../../ui/Menus";
 import Table, { TableContainer } from "../../ui/Table";
 import ColumnMenus from "../../ui/ColumnMenus";
 import { useSearchParams } from "react-router-dom";
+import Error from "../../ui/Error";
 
 const HeaderColumnName = styled.span`
   font-size: 1.6rem;
@@ -22,11 +23,17 @@ const HeaderColumnName = styled.span`
 
 export default function JobTable({ searchValue = "" }) {
   const { isPending, jobs, error } = useJobs({ searchValue });
-  console.log(jobs);
+
   const [searchParams] = useSearchParams();
 
   if (isPending) return <Spinner />;
 
+  if (error)
+    return <Error msg={"Jobs Could not be loaded! Try again later."} />;
+
+  // 1) Filters
+
+  // Filter - 1.1
   const filterValue = searchParams.get("status") || "all";
   let filteredJobs = jobs;
   if (filterValue === "all") filteredJobs = jobs;
@@ -35,7 +42,7 @@ export default function JobTable({ searchValue = "" }) {
   if (filterValue === "done")
     filteredJobs = jobs.filter((job) => job.status === "done");
 
-  // 1) Filters
+  // Filter - 1.2
   let filteredJobsExtend = filteredJobs;
 
   const filterValueRaw = searchParams.get("experience-salaryrange")
@@ -53,13 +60,10 @@ export default function JobTable({ searchValue = "" }) {
         }
       : filterValueRaw;
 
-  // console.log(filterValueExpSalary);
-
   if (filterValueExpSalary === "all") filteredJobsExtend = filteredJobs;
 
   if (filterValueExpSalary !== "all")
     filteredJobsExtend = filteredJobs.filter((job) => {
-      // console.log(job.experience === filterValueExpSalary.experience);
       return (
         job.experience === filterValueExpSalary.experience &&
         (job.salary >= filterValueExpSalary.salaryRange.min ||
@@ -67,11 +71,7 @@ export default function JobTable({ searchValue = "" }) {
       );
     });
 
-  // console.log(filteredJobsExtend);
-
-  //   1) Sort
-
-  // let sortedJobs = filteredJobs;
+  // 2) Sorting
   let sortedJobs = filteredJobsExtend;
   const [field, direction] = searchParams.get("sortBy")?.split("-") || [];
   const modifier = direction === "asc" ? 1 : -1;
@@ -101,7 +101,6 @@ export default function JobTable({ searchValue = "" }) {
     "status",
     "benefit",
   ];
-  // console.log(headerColumns);
 
   return (
     <Menus>
@@ -155,16 +154,8 @@ export default function JobTable({ searchValue = "" }) {
 
           <Table.Body
             data={sortedJobs}
-            render={(job, i) => {
-              // if (i === sortedJobs.length - 1) {
-              //   return <JobRow key={job.id} job={job} ref={lastJobRowRef} />;
-              // }
-
-              return <JobRow key={job.id} job={job} />;
-            }}
+            render={(job, i) => <JobRow key={job.id} job={job} />}
           />
-
-          {/* {isLoading && <Spinner />} */}
         </Table>
       </TableContainer>
     </Menus>

@@ -9,10 +9,6 @@ const InputSearch = styled.input`
   width: 40rem;
   transition: all 0.3s;
   color: var(--color-grey-600);
-  /* outline: 2px solid #3d67ff;
-  outline-offset: 2px; */
-
-  /* background-color: var(--color-background-900); */
   background-color: var(--color-grey-200);
 
   &::placeholder {

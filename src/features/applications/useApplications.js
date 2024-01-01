@@ -20,12 +20,8 @@ export function useApplications({ flag = true } = {}) {
   const queryClient = useQueryClient();
 
   const [searchParams] = useSearchParams();
-  console.log(searchParams);
+
   const filterValues = [];
-  for (const [key, value] of searchParams) {
-    console.log(key);
-    console.log(value);
-  }
 
   for (const [key, value] of searchParams) {
     if (key.startsWith("salary") || key.startsWith("experience")) {
@@ -86,9 +82,7 @@ export function useApplications({ flag = true } = {}) {
     }
   }
 
-  console.log(filterValues);
   const filters = filterValues.length === 0 ? null : filterValues;
-  console.log(filters);
 
   const currentPage = searchParams.get("page")
     ? Number(searchParams.get("page"))
@@ -107,10 +101,9 @@ export function useApplications({ flag = true } = {}) {
     retry: false,
   });
 
-  console.log(count);
   const pageCount = Math.ceil(count / 5);
-  console.log(pageCount);
 
+  // Pre-fetching
   if (currentPage < pageCount) {
     console.log(111);
     queryClient.prefetchQuery({
@@ -125,7 +118,8 @@ export function useApplications({ flag = true } = {}) {
       queryFn: () => getApplications({ filters, currentPage: currentPage - 1 }),
     });
   }
-  return { isPending, applications, isError, count };
+
+  return { isPending, applications, isError, count, error };
 }
 
 // for (let [field, value] of searchParams) {

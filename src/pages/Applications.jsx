@@ -31,7 +31,6 @@ export default function Applications() {
       <Box>
         <Row>
           <Heading as="h1">All Applications</Heading>
-          {/* <SearchBox /> */}
           <AddApplication />
         </Row>
         <ApplicationTableOperations />

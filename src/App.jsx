@@ -21,10 +21,79 @@ const Users = lazy(() => import("./pages/Users"));
 const Account = lazy(() => import("./pages/Account"));
 const Settings = lazy(() => import("./pages/Settings"));
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60000 * 10,
+    },
+  },
+});
+
+// But as soon as you get something that works, it's equally important to zoom out and really understand *why* it works the way it does.
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <GlobalStyles />
+        <BrowserRouter>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="dashboard" />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="selected/:id" element={<SelectedCandidate />} />
+                <Route path="applications" element={<Applications />} />
+                <Route path="applications/:id" element={<Application />} />
+                <Route path="jobs" element={<Jobs />} />
+                <Route path="users" element={<Users />} />
+                <Route path="account" element={<Account />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+
+              <Route path="login" element={<Login />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+
+        <Toaster
+          position="top-right"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 4000,
+            },
+
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-grey-0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
+      </QueryClientProvider>
+    </ThemeProvider>
+  );
+}
+
+// ------ Before
 // dist/index.html                   1.08 kB │ gzip:   0.48 kB
 // dist/assets/index-6d3c405e.css    5.17 kB │ gzip:   1.65 kB
 // dist/assets/index-ba90fc1d.js   735.63 kB │ gzip: 215.58 kB
 
+// ------ After
 // dist/index.html                              1.08 kB │ gzip:   0.48 kB
 // dist/assets/Applications-c48ed37a.css        0.65 kB │ gzip:   0.31 kB
 // dist/assets/index-8da85d73.css               2.15 kB │ gzip:   0.90 kB
@@ -60,68 +129,3 @@ const Settings = lazy(() => import("./pages/Settings"));
 // dist/assets/SearchBox-4c5c5d56.js           26.83 kB │ gzip:  10.20 kB
 // dist/assets/index-7bcc7a5a.js              239.01 kB │ gzip:  77.76 kB
 // dist/assets/Dashboard-a6831d32.js          376.56 kB │ gzip: 104.88 kB
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 60000 * 10,
-    },
-  },
-});
-// But as soon as you get something that works, it's equally important to zoom out and really understand *why* it works the way it does.
-export default function App() {
-  return (
-    <ThemeProvider>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyles />
-        <BrowserRouter>
-          <Suspense fallback={<Spinner />}>
-            <Routes>
-              <Route
-                element={
-                  <ProtectedRoute>
-                    <AppLayout />
-                  </ProtectedRoute>
-                }
-              >
-                <Route index element={<Navigate replace to="dashboard" />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="selected/:id" element={<SelectedCandidate />} />
-                <Route path="applications" element={<Applications />} />
-                <Route path="applications/:id" element={<Application />} />
-                <Route path="jobs" element={<Jobs />} />
-                <Route path="users" element={<Users />} />
-                <Route path="account" element={<Account />} />
-                <Route path="settings" element={<Settings />} />
-                {/* <Route path="folders" element={<FolderExplorer />} /> */}
-              </Route>
-
-              <Route path="login" element={<Login />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-
-        <Toaster
-          position="top-right"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 4000,
-            },
-
-            style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-              padding: "16px 24px",
-              backgroundColor: "var(--color-grey-0)",
-              color: "var(--color-grey-700)",
-            },
-          }}
-        />
-      </QueryClientProvider>
-    </ThemeProvider>
-  );
-}

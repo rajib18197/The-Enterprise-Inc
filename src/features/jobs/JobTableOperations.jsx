@@ -3,7 +3,6 @@ import Filter, { FilterCombined } from "../../ui/Filter";
 
 const StyledJobTableOperations = styled.div`
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
   gap: 1.6rem;
   padding: 0.8rem 0;

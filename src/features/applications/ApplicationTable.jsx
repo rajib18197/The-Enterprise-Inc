@@ -33,12 +33,14 @@ export default function ApplicationList() {
             <div>Resume</div>
             <div></div>
           </Table.Header>
+
           <Table.Body
             data={applications}
             render={(application) => (
               <ApplicationRow key={application.id} application={application} />
             )}
           />
+
           <Table.Footer>
             <Pagination count={count} />
           </Table.Footer>

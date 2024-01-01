@@ -1,14 +1,61 @@
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 import { useSearchParams } from "react-router-dom";
-import styles from "./Pagination.module.css";
+
+import styled, { css } from "styled-components";
+
+const PaginationContainer = styled.div`
+  display: flex;
+  gap: 2.4rem;
+  align-items: center;
+  justify-content: space-between;
+
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+`;
+
+const StyledPagination = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+`;
+
+const Text = styled.p`
+  color: var(--color-grey-600);
+  font-weight: 600;
+`;
+
+const Button = styled.button`
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  border-radius: 100px;
+  background-color: var(--color-brand-600);
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  ${(props) =>
+    props.active === "active" &&
+    css`
+      background-color: var(--color-brand-800);
+      color: white;
+    `}
+`;
+
+const ButtonPages = styled.div`
+  display: flex;
+  gap: 0.6rem;
+`;
 
 const MAX_SIZE_PER_PAGE = 5;
 
 export default function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = Number(searchParams.get("page")) || 1;
+
   const totalPages = Math.ceil(count / MAX_SIZE_PER_PAGE);
-  console.log(page, totalPages);
+  // console.log(page, totalPages);
 
   const stack = 4;
   const siblingCount = 1;
@@ -36,98 +83,94 @@ export default function Pagination({ count }) {
   }
 
   return (
-    <div className={styles.pagination}>
-      <p className={styles.paginationText}>
+    <PaginationContainer>
+      <Text>
         Showing {(page - 1) * MAX_SIZE_PER_PAGE + 1} to{" "}
         {page * MAX_SIZE_PER_PAGE >= count ? count : page * MAX_SIZE_PER_PAGE}{" "}
         of {count} results
-      </p>
-      <div className={styles.paginationMain}>
-        <div className={styles.paginationBtn}>
-          <button onClick={handlePrev}>
-            <HiChevronLeft />
-          </button>
-        </div>
+      </Text>
 
-        <div className={styles.paginationPages} onClick={handleClick}>
+      <StyledPagination>
+        <Button onClick={handlePrev}>
+          <HiChevronLeft />
+        </Button>
+
+        <ButtonPages onClick={handleClick}>
           {totalPages <= 7 &&
             Array.from({ length: totalPages }, (_, i) => (
-              <button
-                key={i + 1}
-                className={`${page === i + 1 ? styles.current : ""}`}
-              >
+              <Button key={i + 1} active={`${page === i + 1 ? "active" : ""}`}>
                 {i + 1}
-              </button>
+              </Button>
             ))}
 
           {page < stack && totalPages > 7 && (
             <>
               {Array.from({ length: stack }, (_, i) => (
-                <button
+                <Button
                   key={i + 1}
-                  className={`${page === i + 1 ? styles.current : ""}`}
+                  active={`${page === i + 1 ? "active" : ""}`}
                 >
                   {i + 1}
-                </button>
+                </Button>
               ))}
 
               <span>...</span>
-              <button>{totalPages}</button>
+              <Button>{totalPages}</Button>
             </>
           )}
 
           {page >= stack && totalPages - page < stack && totalPages > 7 && (
             <>
-              <button>1</button>
+              <Button>1</Button>
               <span>...</span>
               {Array.from({ length: stack }, (_, i) => (
-                <button
+                <Button
                   key={i + 1}
-                  className={`${
-                    page === totalPages - stack + 1 + i ? styles.current : ""
+                  active={`${
+                    page === totalPages - stack + 1 + i ? "active" : ""
                   }`}
                 >
                   {totalPages - stack + 1 + i}
-                </button>
+                </Button>
               ))}
             </>
           )}
 
           {page >= stack && totalPages - page >= stack && (
             <>
-              <button>1</button>
-              <button>2</button>
+              <Button>1</Button>
+              <Button>2</Button>
               <span>...</span>
               {Array.from({ length: siblingCount }, (_, i) => (
-                <button
-                  className={`${page === i + 1 ? styles.current : ""}`}
+                <Button
+                  active={`${page === i + 1 ? "active" : ""}`}
                   key={page - (i + 1)}
                 >
                   {page - (i + 1)}
-                </button>
+                </Button>
               ))}
-              <button className={styles.current}>{page}</button>
+
+              <Button active={"active"}>{page}</Button>
+
               {Array.from({ length: siblingCount }, (_, i) => (
-                <button
-                  className={`${page === i + 1 ? styles.current : ""}`}
+                <Button
+                  active={`${page === i + 1 ? "active" : ""}`}
                   key={page + (i + 1)}
                 >
                   {page + i + 1}
-                </button>
+                </Button>
               ))}
               <span>...</span>
-              <button>{totalPages - 1}</button>
-              <button>{totalPages}</button>
+              <Button>{totalPages - 1}</Button>
+              <Button>{totalPages}</Button>
             </>
           )}
-        </div>
+        </ButtonPages>
 
-        <div className={styles.paginationBtn}>
-          <button onClick={handleNext}>
-            <HiChevronRight />
-          </button>
-        </div>
-      </div>
-    </div>
+        <Button onClick={handleNext}>
+          <HiChevronRight />
+        </Button>
+      </StyledPagination>
+    </PaginationContainer>
   );
 }

@@ -41,7 +41,7 @@ export async function getApplications({ filters, currentPage }) {
 
   if (currentPage) {
     const from = (currentPage - 1) * MAX_SIZE_PER_PAGE;
-    const to = currentPage * MAX_SIZE_PER_PAGE;
+    const to = currentPage * MAX_SIZE_PER_PAGE - 1;
     console.log(from, to);
     query = query.range(from, to);
   }
