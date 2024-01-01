@@ -54,6 +54,7 @@ const Stacked = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  text-align: center;
 
   & span:first-child {
     font-weight: 500;
@@ -114,9 +115,9 @@ export default function ApplicationRow({ application }) {
   }
 
   const statusToTagName = {
-    selected: "indigo",
-    interviewing: "green",
-    "under-review": "silver",
+    selected: "grey",
+    interviewing: "yellow",
+    "under-review": "green",
   };
 
   return (

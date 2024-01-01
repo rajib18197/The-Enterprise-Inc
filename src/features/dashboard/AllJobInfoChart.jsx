@@ -16,8 +16,6 @@ import { useRecentJobs } from "./useRecentJobs";
 const StyledAllJobInfoChart = styled.div`
   grid-column: 1 / -1;
 
-  /* background-color: var(--color-grey-0); */
-  /* border: 1px solid var(--color-grey-100); */
   border-radius: var(--border-radius-md);
 
   box-shadow: var(--shadow-xl);
@@ -28,22 +26,12 @@ const StyledAllJobInfoChart = styled.div`
   flex-direction: column;
   gap: 2.4rem;
 
-  /* Hack to change grid line colors */
+  /* little hack to change grid line colors */
   & .recharts-cartesian-grid-horizontal line,
   & .recharts-cartesian-grid-vertical line {
     stroke: var(--color-grey-300);
   }
 `;
-
-const jobInfo = [
-  { label: "May 24", totalApplication: 4, totalJobPost: 8, totalSelected: 2 },
-  { label: "May 25", totalApplication: 6, totalJobPost: 6, totalSelected: 3 },
-  { label: "May 26", totalApplication: 3, totalJobPost: 2, totalSelected: 0 },
-  { label: "May 27", totalApplication: 0, totalJobPost: 0, totalSelected: 0 },
-  { label: "May 28", totalApplication: 7, totalJobPost: 9, totalSelected: 1 },
-  { label: "May 29", totalApplication: 2, totalJobPost: 2, totalSelected: 0 },
-  { label: "May 30", totalApplication: 1, totalJobPost: 1, totalSelected: 1 },
-];
 
 const colors = {
   totalJobPost: { stroke: "#4f46e5", fill: "#4f46e5" },
@@ -99,10 +87,10 @@ export default function AllJobInfoChart() {
   console.log(allDates);
 
   const isSameDay = function (date1, date2) {
-    const r1 = new Date(date1);
-    const d1 = `${months[r1.getMonth()]} ${r1.getDate()}`;
-    const same = d1 === date2;
-    return same;
+    const date = new Date(date1);
+    const info = `${months[date.getMonth()]} ${date.getDate()}`;
+    const isSame = info === date2;
+    return isSame;
   };
 
   const data = allDates.map((date) => {

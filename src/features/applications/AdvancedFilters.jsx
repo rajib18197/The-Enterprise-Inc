@@ -113,7 +113,9 @@ export default function AdvancedFilters() {
 
       <Main>
         <Row>
-          <Heading>Candidate Experience and Salary Expectation Range</Heading>
+          <Heading as="h2">
+            Candidate Experience and Salary Expectation Range
+          </Heading>
           <FilterRound
             filterFields="experience-salaryExpectationRange"
             options={combined}
@@ -121,12 +123,12 @@ export default function AdvancedFilters() {
         </Row>
 
         <Row>
-          <Heading>Job Types</Heading>
+          <Heading as="h2">Job Types</Heading>
           <FilterBox filterFields={"type"} options={optionsTypes} />
         </Row>
 
         <Row>
-          <Heading>Miscellineous and Status</Heading>
+          <Heading as="h2">Miscellineous and Status</Heading>
           <FilterCheck
             filterFields={"essentials"}
             options={optionsEssentials}

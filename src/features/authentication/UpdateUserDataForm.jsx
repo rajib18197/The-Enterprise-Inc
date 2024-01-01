@@ -48,7 +48,7 @@ export default function UpdateUserDataForm() {
   const Header = (
     <>
       <Heading as="h3">Update User Data</Heading>
-      <FormRow>
+      <FormRow orientation="horizontal">
         <Button disabled={isLoading}>Cancel</Button>
         <Button disabled={isLoading} onClick={handleSubmit}>
           {isLoading ? <SpinnerMini /> : "Update Account"}

@@ -5,7 +5,7 @@ const StyledLogo = styled.div`
   border-radius: var(--border-radius-lm);
   grid-column: 1 / span 1;
   grid-row: 1 / span 1;
-  background-color: #f5f5f5;
+  background-color: var(--color-grey-100);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,9 +29,7 @@ const Img = styled.img`
 function Logo() {
   return (
     <StyledLogo>
-      {/* <Img src="/logo-light.png" alt="Logo" /> */}
-      {/* <Img src="/vite.svg" alt="Logo" /> */}
-      <Img src="/cabin-002.jpg" alt="Logo" />
+      <Img src="/vite.svg" alt="Logo" />
     </StyledLogo>
   );
 }

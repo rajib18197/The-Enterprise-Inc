@@ -53,11 +53,9 @@ const Heading = styled.h1`
       font-weight: 500;
       font-family: "Josefin Sans", sans-serif;
       color: #352e30;
-      /* border-top: 2px solid white;
-      padding: 1rem;
-      border-bottom: 2px solid white; */
+
       text-align: center;
-      width: 45rem;
+      width: 55rem;
       text-transform: capitalize;
       display: flex;
       justify-content: center;

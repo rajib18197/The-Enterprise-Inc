@@ -26,7 +26,7 @@ export default function UpdatePasswordForm() {
   const Header = (
     <>
       <Heading as="h3">Update User Data</Heading>
-      <FormRow>
+      <FormRow orientation="horizontal">
         <Button>Cancel</Button>
         <Button disabled={isLoading} onClick={handleSubmit}>
           {isLoading ? <SpinnerMini /> : "Update Password"}

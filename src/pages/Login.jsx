@@ -16,8 +16,7 @@ const LoginLayout = styled.main`
 export default function Login() {
   return (
     <LoginLayout>
-      {/* <Heading as="h5">Your One Place</Heading> */}
-      <Heading as="h5">Log in to your account</Heading>
+      <Heading as="h5">Welcome, Log in to your account!</Heading>
       <LoginForm type="login" />
     </LoginLayout>
   );

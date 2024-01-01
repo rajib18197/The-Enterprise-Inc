@@ -2,13 +2,7 @@ import styled, { css } from "styled-components";
 import Button from "../../ui/Button";
 import Checkbox from "../../ui/Checkbox";
 import Heading from "../../ui/Heading";
-import { BsTypeBold, BsTypeItalic, BsTypeUnderline } from "react-icons/bs";
-import {
-  FaAlignCenter,
-  FaAlignJustify,
-  FaAlignLeft,
-  FaAlignRight,
-} from "react-icons/fa";
+
 import DetailsHeader from "../applications/DetailsHeader";
 import { useEffect, useState } from "react";
 import { useApplicationDetails } from "../applications/useApplicationDetails";
@@ -22,7 +16,6 @@ import Observation from "../../ui/Observation";
 
 const StyledRemarks = styled.div`
   display: grid;
-  /* grid-template-columns: 1fr 30rem; */
   gap: 1rem;
 `;
 
@@ -48,37 +41,6 @@ const Stacked = styled.div`
   //     color: var(--color-grey-500);
   //     font-size: 1.2rem;
   //   }
-`;
-
-const Editor = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: start;
-`;
-
-const EditorTools = styled.div`
-  display: flex;
-  gap: 1rem;
-  background-color: var(--color-brand-700);
-  padding: 0.4rem;
-  border-radius: 4px;
-  align-items: center;
-`;
-const TextArea = styled.textarea`
-  resize: none;
-  border: 4px solid var(--color-grey-500);
-  width: 100%;
-  height: 15rem;
-`;
-
-const Rotate = styled.span`
-  display: block;
-  transform: rotate(-0.25turn);
-  color: white;
-  //   font-size: 1.8rem;
-  letter-spacing: 2px;
-  width: max-content;
 `;
 
 const InfoText = styled.h2`
@@ -254,73 +216,4 @@ export default function SelectedCandidate() {
       </Stacked>
     </StyledRemarks>
   );
-}
-
-{
-  /* <Stacked color="#ffded6">
-        <Button size={'special'}>
-          <Rotate>Communication</Rotate>
-        </Button>
-        <Button size={'special'}>
-          <Rotate>Self Actualization</Rotate>
-        </Button>
-        <Button size={'special'}>
-          <Rotate>Adaptability</Rotate>
-        </Button>
-        <Button size={'special'}>
-          <Rotate>Attention to Details</Rotate>
-        </Button>
-        <Button size={'special'}>
-          <Rotate>Resilliance</Rotate>
-        </Button>
-        <Button size={'special'}>
-          <Rotate>Problem Solving</Rotate>
-        </Button>
-      </Stacked>
-      <Stacked variation="vertical">
-        <Button>Data Structures and Algorithms</Button>
-        <Button>Operating System</Button>
-        <Button>Version Control</Button>
-        <Button>Computer Networking</Button>
-        <Button>Collaboration</Button>
-        <Button>Documentation</Button>
-        <Button>Cloud Computing</Button>
-      </Stacked> */
-}
-
-{
-  /* <Stacked variation="vertical" type="full">
-<Editor>
-  <Heading as="h3">Observation</Heading>
-  <EditorTools>
-    <div>
-      <button>
-        <BsTypeBold />
-      </button>
-      <button>
-        <BsTypeItalic />
-      </button>
-      <button>
-        <BsTypeUnderline />
-      </button>
-    </div>
-
-    <div>
-      <button>
-        <FaAlignLeft />
-      </button>
-      <button>
-        <FaAlignRight />
-      </button>
-      <button>
-        <FaAlignCenter />
-      </button>
-      <button>
-        <FaAlignJustify />
-      </button>
-    </div>
-  </EditorTools>
-  <TextArea name="" id="" cols="30" rows="10"></TextArea>
-</Editor>
-</Stacked> */
 }

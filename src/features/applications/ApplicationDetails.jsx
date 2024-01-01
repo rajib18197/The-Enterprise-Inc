@@ -261,16 +261,3 @@ export default function ApplicationDetails() {
     </>
   );
 }
-
-// Writing is an efficiency game. Whoever says the most stuff in the fewest words wins
-// 3 skills I'm working on perfecting right now:
-
-// • speaking
-// • writing
-// • design
-
-// Master one, and you'll become powerful.
-
-// Master all three & you'll become deadly.
-
-// (I'm finally getting all the premium features for free. Watch how I become a top designer in the next 3 months.)

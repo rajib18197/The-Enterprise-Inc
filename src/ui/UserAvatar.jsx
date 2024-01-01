@@ -25,19 +25,13 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  /* background-color: var(--color-grey-700); */
-  /* background-color: rgba(77, 43, 43, 0.781); */
-  background-image: linear-gradient(
-    260deg,
-    #3d67ff 0%,
-    #6b3aff 50%,
-    #da96fc 80%
-  );
+  background-image: linear-gradient(260deg, #3d67ff 0%, #6b3aff 50%);
+  /* #da96fc 80% */
   backdrop-filter: blur(30px);
   padding: 0.4rem 1.5rem;
   border-radius: 0.3rem;
-  outline: 2px solid #3d67ff;
-  outline-offset: 2px;
+  /* outline: 2px solid #3d67ff;
+  outline-offset: 2px; */
 
   @media (max-width: 60em) {
     padding: 0.4rem 1rem;
@@ -69,10 +63,6 @@ const Avatar = styled.img`
   object-fit: cover;
   object-position: center;
   border-radius: 0.3rem;
-  /* border-radius: 50%; */
-  outline: 2px solid var(--color-grey-200);
-  outline: 2px solid #3d67ff;
-  outline-offset: 2px;
 `;
 
 export function UserAvatar() {
@@ -96,5 +86,3 @@ export function UserAvatar() {
     </StyledUserAvatar>
   );
 }
-
-// Functionality remaining - prefetching & infinite scroll
