@@ -1,9 +1,3 @@
-# React + Vite
+# **The Enterprise Inc.**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
+> ### The Enterprise Inc. is A small fictional organization that needs to create an useful internal Application which provide utilities and ensures to manage everything about their recruitment workflow: Job Posts, Candidates Applications, Candidates. [HERE](https://portfolio-rajib18197.vercel.app/projects/2) is the full explanation link of the project [https://portfolio-rajib18197.vercel.app/projects/2].
