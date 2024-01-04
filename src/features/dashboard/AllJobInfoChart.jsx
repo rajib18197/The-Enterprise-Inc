@@ -51,7 +51,7 @@ export default function AllJobInfoChart() {
   console.log(applications);
   const numDays = searchParams.get("last")
     ? Number(searchParams.get("last"))
-    : 7;
+    : 90;
 
   const startDate = new Date();
   startDate.setDate(startDate.getDate() - (numDays - 1));

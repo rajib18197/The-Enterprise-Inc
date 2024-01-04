@@ -7,7 +7,7 @@ export function useRecentJobs() {
 
   const numDays = searchParams.get("last")
     ? Number(searchParams.get("last"))
-    : 7;
+    : 90;
   const date = new Date();
   date.setDate(date.getDate() - numDays);
 
