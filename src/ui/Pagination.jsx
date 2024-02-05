@@ -55,7 +55,7 @@ export default function Pagination({ count }) {
   const page = Number(searchParams.get("page")) || 1;
 
   const totalPages = Math.ceil(count / MAX_SIZE_PER_PAGE);
-  // console.log(page, totalPages);
+  console.log(page, totalPages);
 
   const stack = 4;
   const siblingCount = 1;

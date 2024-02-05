@@ -7,6 +7,7 @@ import { Suspense, lazy } from "react";
 
 import Spinner from "./ui/Spinner";
 import ProtectedRoute from "./ui/ProtectedRoute";
+import Filters from "./practice/Filters";
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const AppLayout = lazy(() => import("./ui/AppLayout"));
@@ -55,6 +56,7 @@ export default function App() {
                 <Route path="users" element={<Users />} />
                 <Route path="account" element={<Account />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="test" element={<Filters />} />
               </Route>
 
               <Route path="login" element={<Login />} />

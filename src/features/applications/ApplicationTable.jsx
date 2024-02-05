@@ -42,7 +42,7 @@ export default function ApplicationList() {
           />
 
           <Table.Footer>
-            <Pagination count={count} />
+            <Pagination count={45} />
           </Table.Footer>
         </Table>
       </TableContainer>
